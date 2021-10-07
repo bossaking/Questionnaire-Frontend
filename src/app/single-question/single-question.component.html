@@ -1,0 +1,34 @@
+<div class="question-card" fxLayout="column">
+  <dx-form labelLocation="top" [colCount]="2">
+    <dxi-item dataField="Question" [isRequired]="true" >
+    </dxi-item>
+    <dxi-item dataField="Type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true">
+    </dxi-item>
+    <dxi-item dataField="Description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="Required" editorType="dxSwitch">
+      <dxo-label
+        location="left"
+        alignment="right">
+      </dxo-label>
+    </dxi-item>
+    <dxi-item itemType="button" [buttonOptions]="deleteButtonOptions">
+    </dxi-item>
+  </dx-form>
+  <div style="margin-top: 2em">
+    <ng-template [ngIf]="open" [ngIfThen]="openQuestion"></ng-template>
+    <ng-template [ngIf]="single" [ngIfThen]="singleChoice"></ng-template>
+  </div>
+</div>
+
+<ng-template #openQuestion>
+  <dx-text-area
+    placeholder="Open question answer text" [disabled]="true" height="90">
+  </dx-text-area>
+</ng-template>
+
+<ng-template #singleChoice>
+  <dx-radio-group
+    [dataSource]="singleOptions"
+    displayExpr="value">
+  </dx-radio-group>
+</ng-template>
