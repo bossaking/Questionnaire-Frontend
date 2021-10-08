@@ -16,7 +16,7 @@
   </dx-form>
   <div style="margin-top: 2em">
     <ng-template [ngIf]="open" [ngIfThen]="openQuestion"></ng-template>
-    <ng-template [ngIf]="single" [ngIfThen]="singleChoice"></ng-template>
+    <ng-template [ngIf]="single || multiple" [ngIfThen]="choices"></ng-template>
   </div>
 </div>
 
@@ -26,9 +26,23 @@
   </dx-text-area>
 </ng-template>
 
-<ng-template #singleChoice>
-  <dx-radio-group
-    [dataSource]="singleOptions"
-    displayExpr="value">
-  </dx-radio-group>
+<ng-template #choices>
+  <dx-form style="margin-bottom: 1em" [formData]="question">
+    <dxi-item itemType="group" caption="Answers" name="answers-container">
+      <dxi-item name="answers" itemType="group" *ngFor="let answer of answersOptions; let i = index">
+        <dxi-item [dataField]="'Answers[' + i + ']'" [editorOptions]="answersOptions[i]">
+          <dxo-label location="left" [text]="'Option ' + (i+ 1)">
+          </dxo-label>
+        </dxi-item>
+      </dxi-item>
+    </dxi-item>
+
+  </dx-form>
+  <dx-button
+    (click)="addNewAnswerOption()"
+    text="Add new option"
+    stylingMode="outlined"
+    type="success"
+    icon="add">
+  </dx-button>
 </ng-template>

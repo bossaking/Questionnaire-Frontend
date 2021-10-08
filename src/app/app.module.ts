@@ -10,8 +10,9 @@ import {DxSelectBoxModule} from 'devextreme-angular';
 import {DxFormModule} from 'devextreme-angular';
 import {DxTextAreaModule} from "devextreme-angular";
 import {DxSwitchModule} from 'devextreme-angular';
-import { DxTextBoxModule } from "devextreme-angular";
-import { DxRadioGroupModule } from "devextreme-angular";
+import {DxTextBoxModule} from "devextreme-angular";
+import {DxRadioGroupModule} from "devextreme-angular";
+import {DxiItemModule} from "devextreme-angular/ui/nested";
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SingleQuestionComponent} from './single-question/single-question.component';
@@ -32,10 +33,12 @@ import {SingleQuestionComponent} from './single-question/single-question.compone
     DxSwitchModule,
     DxTextBoxModule,
     DxRadioGroupModule,
+    DxiItemModule,
     FlexLayoutModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SingleQuestionComponent]
 })
 export class AppModule {
 }
