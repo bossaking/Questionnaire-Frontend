@@ -15,7 +15,7 @@ import {Question} from "../Interfaces/Question";
 export class SingleQuestionComponent implements OnInit {
 
   @Output() onRemoveEvent = new EventEmitter();
-  
+
   question: Question = {
     Answers: []
   };

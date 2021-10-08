@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -15,19 +16,20 @@ import {SingleQuestionComponent} from "../single-question/single-question.compon
   templateUrl: './new-questionnaire.component.html',
   styleUrls: ['./new-questionnaire.component.css']
 })
-export class NewQuestionnaireComponent implements OnInit {
+export class NewQuestionnaireComponent implements AfterViewInit {
 
   questionTypes = [];
   disabled: boolean = true;
 
-  singleQuestionComponents: any[] = [];
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | undefined;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
 
   }
 
-  ngOnInit(): void {
+
+  ngAfterViewInit() {
+    this.addComponent();
   }
 
   addComponent() {
@@ -40,7 +42,7 @@ export class NewQuestionnaireComponent implements OnInit {
     this.questionTypes.push(component);
   }
 
-  removeComponent(comp: ComponentRef<SingleQuestionComponent>){
+  removeComponent(comp: ComponentRef<SingleQuestionComponent>) {
     // @ts-ignore
     const component = this.questionTypes.find((component) => component === comp);
     const componentIndex = this.questionTypes.indexOf(component!);
