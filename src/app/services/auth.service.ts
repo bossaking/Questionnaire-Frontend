@@ -5,6 +5,7 @@ import {GlobalVariables} from "../share/GlobalVariables";
 import {catchError, map} from "rxjs/operators";
 import {Service} from "./service";
 import {ToastrService} from "ngx-toastr";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,10 @@ export class AuthService extends Service{
   register(data: any): Observable<any> {
     return this.http.post(GlobalVariables.appUrl + "register", data)
       .pipe(
-        map(result => {
+        map((result: any) => {
           this.showSuccess("Successfully sing up!");
-            return result;
+            this.saveToken(result.token);
+            return of(true);
           }
         ),
         catchError((err) => {
@@ -32,4 +34,16 @@ export class AuthService extends Service{
       );
   }
 
+  saveToken(token: string){
+    localStorage.setItem('token', token);
+  }
+
+  removeToken(){
+    localStorage.removeItem('token');
+  }
+
+  isLoggedIn(){
+    let helper = new JwtHelperService();
+    return !helper.isTokenExpired(localStorage.getItem('token')!);
+  }
 }

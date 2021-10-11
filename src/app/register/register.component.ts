@@ -3,6 +3,7 @@ import {AuthService} from "../services/auth.service";
 import {RegisterUser} from "../Interfaces/RegisterUser";
 import notify from "devextreme/ui/notify";
 import {ToastrService} from "ngx-toastr";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  constructor(private authService: AuthService, private toastr: ToastrService) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
     this.registerUser = {} as RegisterUser;
   }
 
@@ -34,9 +35,11 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loadIndicatorVisible = true;
-    this.authService.register(this.registerUser).subscribe(result => {
+    this.authService.register(this.registerUser).subscribe((result: boolean) => {
       this.loadIndicatorVisible = false;
-      console.log(result);
+      if(result){
+        this.router.navigate(['/home']);
+      }
     });
   }
 

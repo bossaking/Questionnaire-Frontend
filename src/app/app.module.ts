@@ -24,10 +24,12 @@ import {RouterModule, Routes} from "@angular/router";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
-  {path: 'new-questionnaire', component: NewQuestionnaireComponent}
+  {path: 'new-questionnaire', component: NewQuestionnaireComponent},
+  {path: 'home', component: HomeComponent}
 ];
 
 @NgModule({
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
     NewQuestionnaireComponent,
     SingleQuestionComponent,
     NavBarComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
