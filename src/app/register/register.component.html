@@ -1,12 +1,13 @@
 <div class="my-form">
   <h2>Create new account</h2>
+  <dx-load-indicator id="medium-indicator" height="40" width="40" *ngIf="loadIndicatorVisible" ></dx-load-indicator>
   <hr>
-  <dx-form labelLocation="top">
-    <dxi-item dataField="Email" [isRequired]="true" >
+  <dx-form labelLocation="top" [formData]="registerUser">
+    <dxi-item dataField="email" [isRequired]="true" >
     </dxi-item>
-    <dxi-item dataField="Name" [isRequired]="true" >
+    <dxi-item dataField="name" [isRequired]="true" >
     </dxi-item>
-    <dxi-item dataField="Password" [isRequired]="true" >
+    <dxi-item dataField="password" [isRequired]="true" >
     </dxi-item>
     <dxi-item dataField="RepeatPassword" [isRequired]="true" >
       <dxo-label text="Repeat password"></dxo-label>
