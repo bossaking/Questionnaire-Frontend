@@ -18,18 +18,25 @@ import {SingleQuestionComponent} from "../single-question/single-question.compon
 })
 export class NewQuestionnaireComponent implements AfterViewInit {
 
-  questionTypes = [];
-  disabled: boolean = true;
+  createButtonOptions: any = {
+    text: "Create",
+    type: "success",
+    icon: "check",
+    stylingMode: "outlined"
+  };
+
+  minDate: number;
+
+  questions: ComponentRef<SingleQuestionComponent>[] = [];
 
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | undefined;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
-
+    this.minDate = Date.now();
   }
 
 
   ngAfterViewInit() {
-    this.addComponent();
   }
 
   addComponent() {
@@ -38,19 +45,18 @@ export class NewQuestionnaireComponent implements AfterViewInit {
     component.instance.onRemoveEvent.subscribe(() => {
       this.removeComponent(component);
     });
-    // @ts-ignore
-    this.questionTypes.push(component);
+    this.questions.push(component);
   }
 
   removeComponent(comp: ComponentRef<SingleQuestionComponent>) {
-    // @ts-ignore
-    const component = this.questionTypes.find((component) => component === comp);
-    const componentIndex = this.questionTypes.indexOf(component!);
+    const component = this.questions.find((component) => component === comp);
+    const componentIndex = this.questions.indexOf(component!);
 
     if (componentIndex !== -1) {
       this.container!.remove(componentIndex);
-      this.questionTypes.splice(componentIndex, 1);
+      this.questions.splice(componentIndex, 1);
     }
+
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,11 +22,19 @@ export class NavBarComponent implements OnInit {
       }]
   }];
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService, private router: Router) { }
 
 
 
   ngOnInit(): void {
+  }
+
+  menuItemClick(event: any){
+    switch (event.itemData.name){
+      case "Create new":
+        this.router.navigate(["/new-questionnaire"]);
+        break;
+    }
   }
 
 }

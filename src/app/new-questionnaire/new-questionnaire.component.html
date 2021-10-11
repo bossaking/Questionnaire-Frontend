@@ -1,5 +1,36 @@
 <div fxLayout="column" fxLayoutGap="25px">
-    <ng-template #container></ng-template>
+
+  <dx-form labelLocation="top" [colCount]="2">
+    <dxi-item dataField="name" [isRequired]="true">
+      <dxo-label text="Questionnaire name">
+      </dxo-label>
+    </dxi-item>
+    <dxi-item [isRequired]="true" dataField="expiration_at" editorType="dxDateBox" [editorOptions]="{ value: minDate, width: '100%', min:minDate, type: 'datetime',
+     displayFormat:'d/MM/yyyy HH:mm'}">
+      <dxo-label text="Expiration date">
+      </dxo-label>
+    </dxi-item>
+    <dxi-item dataField="Description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="lang" editorType="dxSelectBox" [isRequired]="true">
+      <dxo-label text="Language"></dxo-label>
+    </dxi-item>
+    <dxi-item dataField="password">
+      <dxo-label text="Questionnaire password">
+      </dxo-label>
+    </dxi-item>
+    <dxi-item dataField="is_active" editorType="dxSwitch">
+      <dxo-label
+        location="left"
+        text="Active">
+      </dxo-label>
+    </dxi-item>
+    <dxi-item itemType="button" [buttonOptions]="createButtonOptions">
+    </dxi-item>
+  </dx-form>
+
+  <h2>Questions: </h2>
+
+  <ng-template #container></ng-template>
   <div fxLayout="row" fxLayoutGap="25px">
     <dx-button
       (click)="addComponent()"

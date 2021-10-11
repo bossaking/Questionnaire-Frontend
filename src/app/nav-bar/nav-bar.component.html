@@ -1,26 +1,31 @@
-<div style="display: flex; flex-direction: row">
-  <dx-menu
-    #menu
-    [dataSource]="actions"
-    displayExpr="name"
-    [showFirstSubmenuMode]="{
+<div class="nav-container">
+  <div class="main">
+
+    <dx-menu
+      #menu
+      [dataSource]="actions"
+      displayExpr="name"
+      [showFirstSubmenuMode]="{
             name: 'onHover',
-  delay: { show: 0, hide: 500 }
+  delay: { show: 0, hide: 0 }
   }"
-    orientation="horizontal"
-    [hideSubmenuOnMouseLeave]="false"
-  >
-  </dx-menu>
+      orientation="horizontal"
+      [hideSubmenuOnMouseLeave]="true"
+      (onItemClick)="menuItemClick($event)"
+    >
+    </dx-menu>
 
-  <div style="margin-left: auto">
-    <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="logout" [ngIfElse]="login"></ng-template>
+    <div style="margin-left: auto">
+      <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="logout" [ngIfElse]="login"></ng-template>
+    </div>
   </div>
+
+  <ng-template #logout>
+    <dx-button text="Log Out" (onClick)="authService.logout()" stylingMode="outlined" type="danger"
+               icon="arrowright"></dx-button>
+  </ng-template>
+  <hr>
 </div>
-
-<ng-template #logout>
-  <dx-button text="Log Out" (onClick)="authService.logout()" stylingMode="outlined" type="danger" icon="arrowright"></dx-button>
-</ng-template>
-
 <ng-template #login>
   <div fxLayout="row" fxLayoutGap="20px">
     <dx-button text="Log In" routerLink="/login" stylingMode="outlined" type="success" icon="user"></dx-button>
