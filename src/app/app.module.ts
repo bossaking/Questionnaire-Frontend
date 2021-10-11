@@ -15,6 +15,7 @@ import {DxRadioGroupModule} from "devextreme-angular";
 import {DxiItemModule} from "devextreme-angular/ui/nested";
 import {DxMenuModule} from "devextreme-angular";
 import {DxToastModule} from "devextreme-angular";
+import {DxScrollViewModule} from "devextreme-angular";
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SingleQuestionComponent} from './single-question/single-question.component';
@@ -59,6 +60,7 @@ const appRoutes: Routes = [
     DxiItemModule,
     DxMenuModule,
     DxToastModule,
+    DxScrollViewModule,
     FlexLayoutModule,
     HttpClientModule,
     ToastrModule.forRoot({

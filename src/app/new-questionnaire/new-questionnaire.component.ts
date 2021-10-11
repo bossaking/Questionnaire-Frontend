@@ -29,7 +29,8 @@ export class NewQuestionnaireComponent implements AfterViewInit {
 
   questions: ComponentRef<SingleQuestionComponent>[] = [];
 
-  @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | undefined;
+  @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | any;
+  @ViewChild('button') button: any;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
     this.minDate = Date.now();
@@ -46,6 +47,9 @@ export class NewQuestionnaireComponent implements AfterViewInit {
       this.removeComponent(component);
     });
     this.questions.push(component);
+    setTimeout(() => {
+      this.button.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
+    }, 10 );
   }
 
   removeComponent(comp: ComponentRef<SingleQuestionComponent>) {
