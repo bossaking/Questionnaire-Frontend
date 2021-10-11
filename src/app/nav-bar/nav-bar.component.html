@@ -11,4 +11,8 @@
     [hideSubmenuOnMouseLeave]="false"
   >
   </dx-menu>
+
+  <div>
+    <dx-button text="Log Out" *ngIf="authService.isLoggedIn()" (onClick)="authService.logout()"></dx-button>
+  </div>
 </div>

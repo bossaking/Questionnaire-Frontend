@@ -34,6 +34,16 @@ export class AuthService extends Service{
       );
   }
 
+  logout(){
+    this.removeToken();
+    this.http.post(GlobalVariables.appUrl + "/logout", null).pipe(
+      (map(result => {
+        console.log(result);
+      }))
+    );
+    window.location.reload();
+  }
+
   saveToken(token: string){
     localStorage.setItem('token', token);
   }
