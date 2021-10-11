@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutGap="20px" class="main">
+<div style="display: flex; flex-direction: row">
   <dx-menu
     #menu
     [dataSource]="actions"
@@ -12,7 +12,18 @@
   >
   </dx-menu>
 
-  <div>
-    <dx-button text="Log Out" *ngIf="authService.isLoggedIn()" (onClick)="authService.logout()"></dx-button>
+  <div style="margin-left: auto">
+    <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="logout" [ngIfElse]="login"></ng-template>
   </div>
 </div>
+
+<ng-template #logout>
+  <dx-button text="Log Out" (onClick)="authService.logout()" stylingMode="outlined" type="danger" icon="arrowright"></dx-button>
+</ng-template>
+
+<ng-template #login>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <dx-button text="Log In" routerLink="/login" stylingMode="outlined" type="success" icon="user"></dx-button>
+    <dx-button text="Sign Up" routerLink="/register" stylingMode="outlined" type="default"></dx-button>
+  </div>
+</ng-template>
