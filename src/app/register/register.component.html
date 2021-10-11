@@ -1,0 +1,20 @@
+<div class="my-form">
+  <h2>Create new account</h2>
+  <hr>
+  <dx-form labelLocation="top">
+    <dxi-item dataField="Email" [isRequired]="true" >
+    </dxi-item>
+    <dxi-item dataField="Name" [isRequired]="true" >
+    </dxi-item>
+    <dxi-item dataField="Password" [isRequired]="true" >
+    </dxi-item>
+    <dxi-item dataField="RepeatPassword" [isRequired]="true" >
+      <dxo-label text="Repeat password"></dxo-label>
+    </dxi-item>
+
+    <dxi-item itemType="button" [buttonOptions]="registerOptions">
+    </dxi-item>
+
+  </dx-form>
+</div>
+

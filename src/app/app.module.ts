@@ -18,13 +18,21 @@ import {DxMenuModule} from "devextreme-angular";
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SingleQuestionComponent} from './single-question/single-question.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { RegisterComponent } from './register/register.component';
+import {RouterModule, Routes} from "@angular/router";
+
+const appRoutes: Routes = [
+  {path: 'register', component: RegisterComponent},
+  {path: 'new-questionnaire', component: NewQuestionnaireComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     NewQuestionnaireComponent,
     SingleQuestionComponent,
-    NavBarComponent
+    NavBarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +46,10 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     DxRadioGroupModule,
     DxiItemModule,
     DxMenuModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    RouterModule.forRoot(
+      appRoutes
+    )
   ],
   providers: [],
   bootstrap: [AppComponent],
