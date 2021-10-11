@@ -1,0 +1,15 @@
+<div class="my-form">
+  <h2>Sign In</h2>
+  <dx-load-indicator id="medium-indicator" height="40" width="40" *ngIf="loadIndicatorVisible" ></dx-load-indicator>
+  <hr>
+  <dx-form labelLocation="top" [formData]="loginUser">
+    <dxi-item dataField="email" [isRequired]="true" >
+    </dxi-item>
+    <dxi-item dataField="password" [isRequired]="true" [editorOptions]="{mode: 'password'}" >
+    </dxi-item>
+    <dxi-item itemType="button" [buttonOptions]="loginOptions">
+    </dxi-item>
+
+  </dx-form>
+</div>
+

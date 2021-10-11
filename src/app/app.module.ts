@@ -25,9 +25,11 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { ToastrModule } from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'new-questionnaire', component: NewQuestionnaireComponent},
   {path: 'home', component: HomeComponent}
 ];
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     SingleQuestionComponent,
     NavBarComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

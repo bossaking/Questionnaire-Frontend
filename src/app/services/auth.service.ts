@@ -21,7 +21,24 @@ export class AuthService extends Service{
     return this.http.post(GlobalVariables.appUrl + "register", data)
       .pipe(
         map((result: any) => {
-          this.showSuccess("Successfully sing up!");
+          this.showSuccess("Successfully singed up!");
+            this.saveToken(result.token);
+            return of(true);
+          }
+        ),
+        catchError((err) => {
+          this.showError(err.error.message);
+          console.log(err);
+          return of(false);
+        })
+      );
+  }
+
+  login(data: any): Observable<any>{
+    return this.http.post(GlobalVariables.appUrl + "login", data)
+      .pipe(
+        map((result: any) => {
+            this.showSuccess("Successfully singed in!");
             this.saveToken(result.token);
             return of(true);
           }
