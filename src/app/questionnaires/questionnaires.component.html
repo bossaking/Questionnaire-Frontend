@@ -1,0 +1,32 @@
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [(visible)]="loadingVisible"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>
+
+<div fxLayout="row wrap" fxLayoutGap="25px grid">
+  <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let questionnaire of questionnaires">
+    <ng-container [ngTemplateOutlet]="questionnaireCard"
+                  [ngTemplateOutletContext]="{questionnaire: questionnaire}"></ng-container>
+  </div>
+</div>
+
+
+<ng-template #questionnaireCard let-questionnaire='questionnaire'>
+  <div class="questionnaire-card" fxLayout="column">
+    <div style="display: flex; flex-direction: row">
+      <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}})</h3>
+      <div style="margin-left: auto">
+        <h5 fxLayoutAlign="end" *ngIf="questionnaire.is_active" style="color: #51A351; text-align: center">Active</h5>
+        <h5 *ngIf="!questionnaire.is_active" style="color: #BD362F; text-align: center">Disabled</h5>
+      </div>
+    </div>
+    <h5>Expired at {{questionnaire.expiration_at}}</h5>
+    <div>
+      <p>{{questionnaire.description}}</p>
+    </div>
+  </div>
+</ng-template>

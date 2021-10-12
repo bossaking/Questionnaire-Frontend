@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NewQuestionnaireComponent} from './new-questionnaire/new-questionnaire.component';
 
-import {DxButtonModule, DxLoadIndicatorModule, DxLoadPanelModule} from "devextreme-angular";
+import {DxBoxModule, DxButtonModule, DxLoadIndicatorModule, DxLoadPanelModule} from "devextreme-angular";
 import {DxSelectBoxModule} from 'devextreme-angular';
 import {DxFormModule} from 'devextreme-angular';
 import {DxTextAreaModule} from "devextreme-angular";
@@ -29,6 +29,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
+import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -40,6 +41,7 @@ const appRoutes: Routes = [
       component: HomeComponent
     }]
   },
+  {path: 'mine-questionnaires', component: QuestionnairesComponent},
   {path: 'new-questionnaire', component: NewQuestionnaireComponent}
 ];
 
@@ -51,7 +53,8 @@ const appRoutes: Routes = [
     NavBarComponent,
     RegisterComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    QuestionnairesComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,8 @@ const appRoutes: Routes = [
       appRoutes
     ),
     DxLoadIndicatorModule,
-    DxLoadPanelModule
+    DxLoadPanelModule,
+    DxBoxModule
   ],
   providers: [
     HttpClient,

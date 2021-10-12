@@ -46,6 +46,9 @@ export class NavBarComponent implements OnInit {
       case "Create new":
         this.router.navigate(["/new-questionnaire"]);
         break;
+      case "Show mine":
+        this.router.navigate(["/mine-questionnaires"]);
+        break;
     }
   }
 

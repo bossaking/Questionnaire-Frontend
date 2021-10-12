@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable, of, throwError} from "rxjs";
 import {GlobalVariables} from "../share/GlobalVariables";
 import {catchError, map} from "rxjs/operators";
-import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 import {ToastrService} from "ngx-toastr";
 import {Service} from "./service";
+import {QuestionnaireResponse} from "../Interfaces/QuestionnaireResponse";
 
 @Injectable({
   providedIn: 'root'
@@ -32,4 +32,21 @@ export class QuestionnairesService extends Service {
         })
       );
   }
+
+  getMine(): Observable<TestsResponse>{
+    return this.http.get<TestsResponse>(GlobalVariables.appUrl + "tests")
+      .pipe(
+        map((result: TestsResponse) => {
+          return result;
+        }),
+        catchError((err) => {
+          this.showError(err.error.message);
+          return throwError(err);
+        })
+      );
+  }
+}
+
+export interface TestsResponse{
+  tests: QuestionnaireResponse[];
 }
