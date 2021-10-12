@@ -1,21 +1,6 @@
 <div class="nav-container">
   <div class="main">
-
-    <dx-menu
-      #menu
-      [dataSource]="actions"
-      displayExpr="name"
-      [showFirstSubmenuMode]="{
-            name: 'onHover',
-  delay: { show: 0, hide: 0 }
-  }"
-      orientation="horizontal"
-      [hideSubmenuOnMouseLeave]="true"
-      (onItemClick)="menuItemClick($event)"
-      (click)="clickHome()"
-    >
-    </dx-menu>
-
+    <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="adminMenu" [ngIfElse]="menu"></ng-template>
     <div style="margin-left: auto">
       <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="logout" [ngIfElse]="login"></ng-template>
     </div>
@@ -32,4 +17,38 @@
     <dx-button text="Log In" routerLink="/login" stylingMode="outlined" type="success" icon="user"></dx-button>
     <dx-button text="Sign Up" routerLink="/register" stylingMode="outlined" type="default"></dx-button>
   </div>
+</ng-template>
+
+<ng-template #menu>
+  <dx-menu
+    #menu
+    [dataSource]="actions"
+    displayExpr="name"
+    [showFirstSubmenuMode]="{
+            name: 'onHover',
+  delay: { show: 0, hide: 0 }
+  }"
+    orientation="horizontal"
+    [hideSubmenuOnMouseLeave]="true"
+    (onItemClick)="menuItemClick($event)"
+    (click)="clickHome()"
+  >
+  </dx-menu>
+</ng-template>
+
+<ng-template #adminMenu>
+  <dx-menu
+    #menu
+    [dataSource]="adminActions"
+    displayExpr="name"
+    [showFirstSubmenuMode]="{
+            name: 'onHover',
+  delay: { show: 0, hide: 0 }
+  }"
+    orientation="horizontal"
+    [hideSubmenuOnMouseLeave]="true"
+    (onItemClick)="menuItemClick($event)"
+    (click)="clickHome()"
+  >
+  </dx-menu>
 </ng-template>

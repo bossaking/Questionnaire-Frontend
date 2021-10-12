@@ -5,12 +5,12 @@ import {GlobalVariables} from "../share/GlobalVariables";
 import {catchError, map} from "rxjs/operators";
 import {Service} from "./service";
 import {ToastrService} from "ngx-toastr";
-import { JwtHelperService } from "@auth0/angular-jwt";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends Service{
+export class AuthService extends Service {
 
   constructor(private http: HttpClient, protected toastr: ToastrService) {
     super(toastr);
@@ -21,7 +21,7 @@ export class AuthService extends Service{
     return this.http.post(GlobalVariables.appUrl + "register", data)
       .pipe(
         map((result: any) => {
-          this.showSuccess("Successfully singed up!");
+            this.showSuccess("Successfully singed up!");
             this.saveToken(result.token);
             return of(true);
           }
@@ -34,7 +34,7 @@ export class AuthService extends Service{
       );
   }
 
-  login(data: any): Observable<any>{
+  login(data: any): Observable<any> {
     return this.http.post(GlobalVariables.appUrl + "login", data)
       .pipe(
         map((result: any) => {
@@ -51,7 +51,7 @@ export class AuthService extends Service{
       );
   }
 
-  logout(){
+  logout() {
     this.removeToken();
     this.http.post(GlobalVariables.appUrl + "/logout", null).pipe(
       (map(result => {
@@ -61,15 +61,15 @@ export class AuthService extends Service{
     window.location.reload();
   }
 
-  saveToken(token: string){
+  saveToken(token: string) {
     localStorage.setItem('token', token);
   }
 
-  removeToken(){
+  removeToken() {
     localStorage.removeItem('token');
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     let helper = new JwtHelperService();
     return !helper.isTokenExpired(localStorage.getItem('token')!);
   }

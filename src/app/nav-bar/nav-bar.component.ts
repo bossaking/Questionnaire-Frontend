@@ -9,20 +9,32 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
 
-  actions: any = [{
-    id: "1",
-    name: "Questionnaires",
-    items: [{
-      id: "1_1",
-      name: "Show mine"
-    },
-      {
-        id: "1_2",
-        name: "Create new"
-      }]
-  }];
+  adminActions = [
+    {
+      id: "1",
+      name: "Questionnaires",
+      items: [{
+        id: "1_1",
+        name: "Show mine"
+      },
+        {
+          id: "1_2",
+          name: "Create new"
+        }]
+    }
+  ];
 
-  constructor(public authService: AuthService, private router: Router) { }
+  actions = [
+    {
+      id: "1",
+      name: "Questionnaires"
+    }
+  ];
+
+
+
+  constructor(public authService: AuthService, private router: Router) {
+  }
 
 
 
