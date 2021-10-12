@@ -1,10 +1,11 @@
 <div class="question-card" fxLayout="column">
   <dx-form labelLocation="top" [colCount]="2" [formData]="question">
-    <dxi-item dataField="name" [isRequired]="true" >
+    <dxi-item dataField="name" [isRequired]="true">
     </dxi-item>
     <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true">
     </dxi-item>
-    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }"
+              [colSpan]="2"></dxi-item>
     <dxi-item dataField="is_required" editorType="dxSwitch">
       <dxo-label
         location="left"
@@ -14,7 +15,7 @@
     <dxi-item itemType="button" [buttonOptions]="deleteButtonOptions">
     </dxi-item>
   </dx-form>
-  <div style="margin-top: 2em">
+  <div style="margin-top: 2em" #template>
     <ng-template [ngIf]="open" [ngIfThen]="openQuestion"></ng-template>
     <ng-template [ngIf]="single || multiple" [ngIfThen]="choices"></ng-template>
   </div>
@@ -38,11 +39,14 @@
     </dxi-item>
 
   </dx-form>
-  <dx-button
-    (click)="addNewAnswerOption()"
-    text="Add new option"
-    stylingMode="outlined"
-    type="success"
-    icon="add">
-  </dx-button>
+  <div #button>
+    <dx-button
+
+      (click)="addNewAnswerOption()"
+      text="Add new option"
+      stylingMode="outlined"
+      type="success"
+      icon="add">
+    </dx-button>
+  </div>
 </ng-template>

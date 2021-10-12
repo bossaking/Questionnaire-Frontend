@@ -1,5 +1,14 @@
 import {QuestionType} from "../Interfaces/QuestionType";
-import {NgModule, Component, enableProdMode, AfterViewInit, OnInit, Output, EventEmitter} from '@angular/core';
+import {
+  NgModule,
+  Component,
+  enableProdMode,
+  AfterViewInit,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {
@@ -50,6 +59,8 @@ export class SingleQuestionComponent implements OnInit {
     onValueChanged: this.onValueChanged.bind(this)
   }
 
+  @ViewChild('template') template: any;
+  @ViewChild('button') button: any;
   constructor() {
     this.questionTypes.push(new class implements QuestionType {
       Id = 1;
@@ -84,6 +95,9 @@ export class SingleQuestionComponent implements OnInit {
   addNewAnswerOption(){
     this.question.options!.push({} as Option);
     this.answersOptions = this.getAnswersOptions(this.question.options);
+    setTimeout(() => {
+      this.button.nativeElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
+    }, 10 );
   }
 
   generateNewAnswersOptions(index: number) {
@@ -115,6 +129,9 @@ export class SingleQuestionComponent implements OnInit {
     switch (event.value) {
       case 1:
         this.open = true;
+        setTimeout(() => {
+          this.template.nativeElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
+        }, 10 );
         break;
       case 2:
         this.single = true;
