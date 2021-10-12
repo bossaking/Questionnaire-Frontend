@@ -1,3 +1,11 @@
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [(visible)]="loadingVisible"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>
 <div fxLayout="column" fxLayoutGap="25px">
 
   <dx-form labelLocation="top" [colCount]="2" [formData]="questionnaire">

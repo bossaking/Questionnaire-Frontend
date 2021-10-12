@@ -14,6 +14,7 @@ import {Lang} from "../Interfaces/Lang";
 import {Questionnaire} from "../Interfaces/Questionnaire";
 import {formatDate} from "@angular/common";
 import {QuestionnairesService} from "../services/questionnaires.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-questionnaire',
@@ -22,12 +23,12 @@ import {QuestionnairesService} from "../services/questionnaires.service";
 })
 export class NewQuestionnaireComponent implements AfterViewInit {
 
+  loadingVisible: boolean = false;
   questionnaire: Questionnaire;
 
   createButtonOptions: any = {
     text: "Create",
     type: "success",
-    icon: "check",
     stylingMode: "outlined",
     onClick:() => {
       this.createNewQuestionnaire();
@@ -49,7 +50,7 @@ export class NewQuestionnaireComponent implements AfterViewInit {
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | any;
   @ViewChild('button') button: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private questionnairesService: QuestionnairesService) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private questionnairesService: QuestionnairesService, private router: Router) {
     this.languages.push(new class implements Lang {
       Id = "pl";
       Name = "Polski"
@@ -90,6 +91,7 @@ export class NewQuestionnaireComponent implements AfterViewInit {
   }
 
   createNewQuestionnaire(){
+    this.loadingVisible = true;
     this.questionnaire.questions = [];
     this.questionnaire.expiration_at =  formatDate(this.questionnaire.expiration_at, 'yyyy-MM-dd HH:mm:ss', 'pl');
     this.questionnaire.is_active = JSON.parse(String(this.questionnaire.is_active));
@@ -98,11 +100,13 @@ export class NewQuestionnaireComponent implements AfterViewInit {
         this.questions[i].instance.question.options = null;
       this.questionnaire.questions.push(this.questions[i].instance.question);
     }
-    console.log(this.questionnaire);
+
     this.questionnairesService.store(this.questionnaire).subscribe(result => {
-      console.log(result);
+      this.loadingVisible = false;
+      if(result){
+        this.router.navigate(['home']);
+      }
     });
-    //console.log(this.questionnaire);
   }
 
 }

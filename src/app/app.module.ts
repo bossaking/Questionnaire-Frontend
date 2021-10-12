@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NewQuestionnaireComponent} from './new-questionnaire/new-questionnaire.component';
 
-import {DxButtonModule, DxLoadIndicatorModule} from "devextreme-angular";
+import {DxButtonModule, DxLoadIndicatorModule, DxLoadPanelModule} from "devextreme-angular";
 import {DxSelectBoxModule} from 'devextreme-angular';
 import {DxFormModule} from 'devextreme-angular';
 import {DxTextAreaModule} from "devextreme-angular";
@@ -76,7 +76,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
-    DxLoadIndicatorModule
+    DxLoadIndicatorModule,
+    DxLoadPanelModule
   ],
   providers: [
     HttpClient,
