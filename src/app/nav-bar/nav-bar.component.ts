@@ -14,7 +14,7 @@ export class NavBarComponent implements OnInit {
     name: "Questionnaires",
     items: [{
       id: "1_1",
-      name: "Show all"
+      name: "Show mine"
     },
       {
         id: "1_2",
@@ -35,6 +35,10 @@ export class NavBarComponent implements OnInit {
         this.router.navigate(["/new-questionnaire"]);
         break;
     }
+  }
+
+  clickHome(){
+    this.router.navigate(["/home"]);
   }
 
 }
