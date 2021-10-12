@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="25px">
 
-  <dx-form labelLocation="top" [colCount]="2">
+  <dx-form labelLocation="top" [colCount]="2" [formData]="questionnaire">
     <dxi-item dataField="name" [isRequired]="true">
       <dxo-label text="Questionnaire name">
       </dxo-label>
@@ -10,15 +10,15 @@
       <dxo-label text="Expiration date">
       </dxo-label>
     </dxi-item>
-    <dxi-item dataField="Description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
-    <dxi-item dataField="lang" editorType="dxSelectBox" [isRequired]="true">
+    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="lang" editorType="dxSelectBox" [editorOptions]="selectLangOptions" [isRequired]="true">
       <dxo-label text="Language"></dxo-label>
     </dxi-item>
     <dxi-item dataField="password">
       <dxo-label text="Questionnaire password">
       </dxo-label>
     </dxi-item>
-    <dxi-item dataField="is_active" editorType="dxSwitch">
+    <dxi-item dataField="is_active" editorType="dxSwitch" [editorOptions]="{value:'true'}">
       <dxo-label
         location="left"
         text="Active">

@@ -10,6 +10,9 @@ import {
 } from '@angular/core';
 import {QuestionType} from "../Interfaces/QuestionType";
 import {SingleQuestionComponent} from "../single-question/single-question.component";
+import {Lang} from "../Interfaces/Lang";
+import {Questionnaire} from "../Interfaces/Questionnaire";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-new-questionnaire',
@@ -18,14 +21,27 @@ import {SingleQuestionComponent} from "../single-question/single-question.compon
 })
 export class NewQuestionnaireComponent implements AfterViewInit {
 
+  questionnaire: Questionnaire;
+
   createButtonOptions: any = {
     text: "Create",
     type: "success",
     icon: "check",
-    stylingMode: "outlined"
+    stylingMode: "outlined",
+    onClick:() => {
+      this.createNewQuestionnaire();
+    }
   };
 
   minDate: number;
+
+  languages: Lang[] = [];
+  selectLangOptions = {
+    items: this.languages,
+    searchEnabled: false,
+    valueExpr: "Id",
+    displayExpr: "Name"
+  };
 
   questions: ComponentRef<SingleQuestionComponent>[] = [];
 
@@ -33,7 +49,17 @@ export class NewQuestionnaireComponent implements AfterViewInit {
   @ViewChild('button') button: any;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+    this.languages.push(new class implements Lang {
+      Id = "pl";
+      Name = "Polski"
+    }());
+    this.languages.push(new class implements Lang {
+      Id = "en";
+      Name = "English"
+    }());
     this.minDate = Date.now();
+    this.questionnaire = {} as Questionnaire;
+    this.questionnaire.questions = [];
   }
 
 
@@ -61,6 +87,15 @@ export class NewQuestionnaireComponent implements AfterViewInit {
       this.questions.splice(componentIndex, 1);
     }
 
+  }
+
+  createNewQuestionnaire(){
+    this.questionnaire.expiration_at =  formatDate(this.questionnaire.expiration_at, 'yyyy-MM-dd HH:mm:ss', 'pl');
+    for(let i = 0; i < this.questions.length; i++){
+      this.questionnaire.questions.push(this.questions[i].instance.question);
+    }
+    // console.log(this.questions[0].instance.question);
+    console.log(this.questionnaire);
   }
 
 }

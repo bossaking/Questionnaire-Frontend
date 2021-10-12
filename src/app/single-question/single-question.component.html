@@ -1,11 +1,11 @@
 <div class="question-card" fxLayout="column">
-  <dx-form labelLocation="top" [colCount]="2">
-    <dxi-item dataField="Question" [isRequired]="true" >
+  <dx-form labelLocation="top" [colCount]="2" [formData]="question">
+    <dxi-item dataField="name" [isRequired]="true" >
     </dxi-item>
-    <dxi-item dataField="Type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true">
+    <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true">
     </dxi-item>
-    <dxi-item dataField="Description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
-    <dxi-item dataField="Required" editorType="dxSwitch">
+    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="is_required" editorType="dxSwitch">
       <dxo-label
         location="left"
         alignment="right">
@@ -28,9 +28,9 @@
 
 <ng-template #choices>
   <dx-form style="margin-bottom: 1em" [formData]="question">
-    <dxi-item itemType="group" caption="Answers" name="answers-container">
-      <dxi-item name="answers" itemType="group" *ngFor="let answer of answersOptions; let i = index">
-        <dxi-item [dataField]="'Answers[' + i + ']'" [editorOptions]="answersOptions[i]">
+    <dxi-item itemType="group" caption="Options" name="answers-container">
+      <dxi-item name="options" itemType="group" *ngFor="let answer of answersOptions; let i = index">
+        <dxi-item [dataField]="'options[' + i + '].description'" [editorOptions]="answersOptions[i].description">
           <dxo-label location="left" [text]="'Option ' + (i+ 1)">
           </dxo-label>
         </dxi-item>

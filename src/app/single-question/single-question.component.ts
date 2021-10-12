@@ -6,6 +6,7 @@ import {
   DxFormModule
 } from 'devextreme-angular';
 import {Question} from "../Interfaces/Question";
+import {Option} from "../Interfaces/Option";
 
 @Component({
   selector: 'single-question',
@@ -16,9 +17,7 @@ export class SingleQuestionComponent implements OnInit {
 
   @Output() onRemoveEvent = new EventEmitter();
 
-  question: Question = {
-    Answers: []
-  };
+  question: Question;
 
   open: boolean = false;
   single: boolean = false;
@@ -64,8 +63,10 @@ export class SingleQuestionComponent implements OnInit {
       Id = 3;
       Name = "Question with many answers"
     }());
-
-    this.answersOptions = this.getAnswersOptions(this.question.Answers);
+    this.question = {} as Question;
+    this.question.options = [];
+    this.question.is_required = false;
+    this.answersOptions = this.getAnswersOptions(this.question.options);
   }
 
   getAnswersOptions(answers: any){
@@ -81,8 +82,8 @@ export class SingleQuestionComponent implements OnInit {
   }
 
   addNewAnswerOption(){
-    this.question.Answers!.push("");
-    this.answersOptions = this.getAnswersOptions(this.question.Answers);
+    this.question.options!.push({} as Option);
+    this.answersOptions = this.getAnswersOptions(this.question.options);
   }
 
   generateNewAnswersOptions(index: number) {
@@ -95,8 +96,8 @@ export class SingleQuestionComponent implements OnInit {
             stylingMode: "text",
             icon: "trash",
             onClick: () => {
-              this.question.Answers!.splice(index, 1);
-              this.answersOptions = this.getAnswersOptions(this.question.Answers);
+              this.question.options!.splice(index, 1);
+              this.answersOptions = this.getAnswersOptions(this.question.options);
             }
           }
         }]
@@ -109,7 +110,7 @@ export class SingleQuestionComponent implements OnInit {
     this.open = false;
     this.questionType = event.value;
 
-    this.question.Answers = [];
+    this.question.options = [];
 
     switch (event.value) {
       case 1:

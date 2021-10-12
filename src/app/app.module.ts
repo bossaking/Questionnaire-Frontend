@@ -1,4 +1,5 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import '@angular/common/locales/global/pl';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -76,7 +77,12 @@ const appRoutes: Routes = [
     ),
     DxLoadIndicatorModule
   ],
-  providers: [HttpClient],
+  providers: [
+    HttpClient,
+    {
+      provide: LOCALE_ID, useValue: 'pl'
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [SingleQuestionComponent]
 })
