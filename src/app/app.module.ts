@@ -23,7 +23,8 @@ import {SingleQuestionComponent} from './single-question/single-question.compone
 import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {RegisterComponent} from './register/register.component';
 import {RouterModule, Routes} from "@angular/router";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
+import {MainInterceptorService} from "./services/interceptors/main-interceptor.service";
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HomeComponent} from './home/home.component';
@@ -79,6 +80,9 @@ const appRoutes: Routes = [
   ],
   providers: [
     HttpClient,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: MainInterceptorService, multi: true
+    },
     {
       provide: LOCALE_ID, useValue: 'pl'
     }

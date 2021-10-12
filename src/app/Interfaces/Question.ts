@@ -5,5 +5,5 @@ export interface Question{
   type:number;
   description:string;
   is_required:boolean;
-  options: Option[];
+  options: Option[] | null;
 }
