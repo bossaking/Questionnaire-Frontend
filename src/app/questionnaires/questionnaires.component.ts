@@ -13,13 +13,21 @@ export class QuestionnairesComponent implements OnInit {
 
   questionnaires: QuestionnaireResponse[] = [];
 
-  constructor(private questionnairesService: QuestionnairesService) { }
+  actualDate:number;
+
+  constructor(private questionnairesService: QuestionnairesService) {
+    this.actualDate = Date.now();
+    console.log(this.actualDate);
+  }
 
   ngOnInit(): void {
     this.questionnairesService.getMine().subscribe((result: TestsResponse) => {
       this.loadingVisible = false;
       console.log(result);
       this.questionnaires = result.tests;
+      for(let questionnaire of this.questionnaires){
+        questionnaire.expiration_date = Date.parse(questionnaire.expiration_at);
+      }
     });
   }
 
