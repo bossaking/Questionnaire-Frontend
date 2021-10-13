@@ -16,15 +16,12 @@
 
 
 <ng-template #questionnaireCard let-questionnaire='questionnaire'>
-  <div class="questionnaire-card" fxLayout="column">
+  <div class="questionnaire-card" fxLayout="column" [routerLink]="['/show-questionnaire', questionnaire.link]">
     <div style="display: flex; flex-direction: row">
       <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}})</h3>
       <div style="margin-left: auto">
         <ng-container [ngTemplateOutlet]="status"
                       [ngTemplateOutletContext]="{questionnaire: questionnaire}"></ng-container>
-
-        <!--        <h5 *ngIf="!questionnaire.is_active" style="color: #BD362F; text-align: center">Disabled</h5>-->
-        <!--        <h5 *ngIf="questionnaire.expiration_at < actualDate" style="color: #BD362F; text-align: center">Expired</h5>-->
       </div>
     </div>
     <h5>Expired at {{questionnaire.expiration_at}}</h5>

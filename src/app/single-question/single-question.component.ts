@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild, Input
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -24,9 +24,12 @@ import {Option} from "../Interfaces/Option";
 })
 export class SingleQuestionComponent implements OnInit {
 
+  question: Question;
+
+  // @Input() setQuestionEvent = new EventEmitter();
   @Output() onRemoveEvent = new EventEmitter();
 
-  question: Question;
+  //question: Question;
 
   open: boolean = false;
   single: boolean = false;
@@ -146,6 +149,26 @@ export class SingleQuestionComponent implements OnInit {
 
   remove(){
     this.onRemoveEvent.emit();
+  }
+
+  setQuestion(quest:Question){
+    this.question = quest;
+    switch (this.question.type) {
+      case 1:
+        this.open = true;
+        setTimeout(() => {
+          this.template.nativeElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
+        }, 10 );
+        break;
+      case 2:
+        this.single = true;
+        this.answersOptions = this.getAnswersOptions(this.question.options);
+        break;
+      case 3:
+        this.multiple = true;
+        this.answersOptions = this.getAnswersOptions(this.question.options);
+        break;
+    }
   }
 
 }

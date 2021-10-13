@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
+import { SingleQuestionnaireAdminComponent } from './single-questionnaire-admin/single-questionnaire-admin.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -42,7 +43,7 @@ const appRoutes: Routes = [
     }]
   },
   {path: 'mine-questionnaires', component: QuestionnairesComponent},
-  {path: 'new-questionnaire', component: NewQuestionnaireComponent}
+  {path: 'show-questionnaire/:link', component: SingleQuestionnaireAdminComponent}
 ];
 
 @NgModule({
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     RegisterComponent,
     HomeComponent,
     LoginComponent,
-    QuestionnairesComponent
+    QuestionnairesComponent,
+    SingleQuestionnaireAdminComponent
   ],
   imports: [
     BrowserModule,

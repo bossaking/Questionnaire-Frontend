@@ -6,6 +6,8 @@ import {catchError, map} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
 import {Service} from "./service";
 import {QuestionnaireResponse} from "../Interfaces/QuestionnaireResponse";
+import {Question} from "../Interfaces/Question";
+import {Questionnaire} from "../Interfaces/Questionnaire";
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,19 @@ export class QuestionnairesService extends Service {
     return this.http.get<TestsResponse>(GlobalVariables.appUrl + "tests")
       .pipe(
         map((result: TestsResponse) => {
+          return result;
+        }),
+        catchError((err) => {
+          this.showError(err.error.message);
+          return throwError(err);
+        })
+      );
+  }
+
+  getByLink(link: string): Observable<any>{
+    return this.http.get(GlobalVariables.appUrl + "tests/show/" + link)
+      .pipe(
+        map((result: any) => {
           return result;
         }),
         catchError((err) => {
