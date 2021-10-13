@@ -4,6 +4,7 @@ import {RegisterUser} from "../Interfaces/RegisterUser";
 import notify from "devextreme/ui/notify";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-register',
@@ -16,21 +17,24 @@ export class RegisterComponent implements OnInit {
 
   registerUser: RegisterUser;
 
-  registerOptions: any = {
-    text: "Sign Up",
-    type: "success",
-    icon: "user",
-    stylingMode: "outlined",
-    onClick: () => {
-      this.register()
-    }
-  };
+  registerOptions: any = {};
 
-  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router) {
+  constructor(private authService: AuthService, private toastr: ToastrService, private router: Router, private translate: TranslateService) {
     this.registerUser = {} as RegisterUser;
   }
 
   ngOnInit(): void {
+    this.translate.get('Registration').subscribe((result: any) => {
+      this.registerOptions = {
+        text: result,
+        type: "success",
+        icon: "user",
+        stylingMode: "outlined",
+        onClick: () => {
+          this.register()
+        }
+      };
+    });
   }
 
   register() {

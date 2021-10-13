@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {LoginUser} from "../Interfaces/LoginUser";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-login',
@@ -12,21 +13,24 @@ export class LoginComponent implements OnInit {
   loadIndicatorVisible = false;
   loginUser: LoginUser;
 
-  loginOptions: any = {
-    text: "Sign In",
-    type: "success",
-    icon: "user",
-    stylingMode: "outlined",
-    onClick: () => {
-      this.login()
-    }
-  };
+  loginOptions: any = {};
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private translate: TranslateService) {
     this.loginUser = {} as LoginUser;
   }
 
   ngOnInit(): void {
+    this.translate.get("Login").subscribe((result: string) => {
+      this.loginOptions = {
+        text: result,
+        type: "success",
+        icon: "user",
+        stylingMode: "outlined",
+        onClick: () => {
+          this.login()
+        }
+      };
+    });
   }
 
   login(){

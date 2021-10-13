@@ -32,6 +32,9 @@ import {LoginComponent} from './login/login.component';
 import { QuestionnairesComponent } from './questionnaires/questionnaires.component';
 import { SingleQuestionnaireAdminComponent } from './single-questionnaire-admin/single-questionnaire-admin.component';
 
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
@@ -83,7 +86,14 @@ const appRoutes: Routes = [
     ),
     DxLoadIndicatorModule,
     DxLoadPanelModule,
-    DxBoxModule
+    DxBoxModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [
     HttpClient,
@@ -98,4 +108,8 @@ const appRoutes: Routes = [
   entryComponents: [SingleQuestionComponent]
 })
 export class AppModule {
+}
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

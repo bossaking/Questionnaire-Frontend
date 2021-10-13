@@ -3,6 +3,16 @@
   flex-direction: row;
 }
 
+.main > img{
+  width: 1.5em;
+  height: 1.5em;
+  margin: auto 0 auto 1em;
+}
+
+.main > img:hover{
+  cursor: pointer;
+}
+
 .nav-container{
   margin-bottom: 2em;
 }

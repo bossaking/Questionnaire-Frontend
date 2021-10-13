@@ -1,21 +1,23 @@
 <div class="nav-container">
   <div class="main">
     <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="adminMenu" [ngIfElse]="menu"></ng-template>
+    <ng-template [ngIf]="poland" [ngIfThen]="pl" [ngIfElse]="en"></ng-template>
     <div style="margin-left: auto">
       <ng-template [ngIf]="authService.isLoggedIn()" [ngIfThen]="logout" [ngIfElse]="login"></ng-template>
     </div>
+
   </div>
 
   <ng-template #logout>
-    <dx-button text="Log Out" (onClick)="authService.logout()" stylingMode="outlined" type="danger"
+    <dx-button text="{{'SignOut' | translate}}" (onClick)="authService.logout()" stylingMode="outlined" type="danger"
                icon="arrowright"></dx-button>
   </ng-template>
   <hr>
 </div>
 <ng-template #login>
   <div fxLayout="row" fxLayoutGap="20px">
-    <dx-button text="Log In" routerLink="/login" stylingMode="outlined" type="success" icon="user"></dx-button>
-    <dx-button text="Sign Up" routerLink="/register" stylingMode="outlined" type="default"></dx-button>
+    <dx-button text="{{'SignIn' | translate}}" routerLink="/login" stylingMode="outlined" type="success" icon="user"></dx-button>
+    <dx-button text="{{'SignUp' | translate}}" routerLink="/register" stylingMode="outlined" type="default"></dx-button>
   </div>
 </ng-template>
 
@@ -51,4 +53,11 @@
     (click)="clickHome()"
   >
   </dx-menu>
+</ng-template>
+
+<ng-template #pl>
+  <img alt="language" src="assets/images/polski.png" (click)="changeLanguage()">
+</ng-template>
+<ng-template #en>
+  <img alt="language" src="assets/images/english.png" (click)="changeLanguage()">
 </ng-template>

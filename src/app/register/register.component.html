@@ -1,16 +1,18 @@
 <div class="my-form">
-  <h2>Create new account</h2>
+  <h2>{{"CreateNewAccount" | translate}}</h2>
   <dx-load-indicator id="medium-indicator" height="40" width="40" *ngIf="loadIndicatorVisible" ></dx-load-indicator>
   <hr>
   <dx-form labelLocation="top" [formData]="registerUser">
     <dxi-item dataField="email" [isRequired]="true" >
     </dxi-item>
     <dxi-item dataField="name" [isRequired]="true" >
+      <dxo-label text="{{'Username' | translate}}"></dxo-label>
     </dxi-item>
     <dxi-item dataField="password" [isRequired]="true" [editorOptions]="{mode: 'password'}" >
+      <dxo-label text="{{'Password' | translate}}"></dxo-label>
     </dxi-item>
     <dxi-item dataField="RepeatPassword" [isRequired]="true" [editorOptions]="{mode: 'password'}" >
-      <dxo-label text="Repeat password"></dxo-label>
+      <dxo-label text="{{'RepeatPassword' | translate}}"></dxo-label>
     </dxi-item>
 
     <dxi-item itemType="button" [buttonOptions]="registerOptions">
