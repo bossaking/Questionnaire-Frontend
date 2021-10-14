@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {QuestionnaireResponse} from "../Interfaces/QuestionnaireResponse";
 import {QuestionnairesService, TestsResponse} from "../services/questionnaires.service";
+import {MatDialog} from "@angular/material/dialog";
+import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,9 @@ export class HomeComponent implements OnInit {
 
   actualDate:number;
 
-  constructor(private questionnairesService: QuestionnairesService) {
+  password: string = "";
+
+  constructor(private questionnairesService: QuestionnairesService, public dialog: MatDialog) {
     this.actualDate = Date.now();
   }
 
@@ -28,6 +32,16 @@ export class HomeComponent implements OnInit {
         questionnaire.expiration_date = Date.parse(questionnaire.expiration_at);
       }
     });
+  }
+
+  openQuestionnaire(questionnaire: QuestionnaireResponse){
+    if(questionnaire.password !== null){
+      const dialogRef = this.dialog.open(PasswordDialogComponent);
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.password = result === undefined ? "" : result;
+      });
+    }
   }
 
 }

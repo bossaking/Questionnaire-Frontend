@@ -16,9 +16,9 @@
 
 
 <ng-template #questionnaireCard let-questionnaire='questionnaire'>
-  <div class="questionnaire-card" fxLayout="column" [routerLink]="['/show-questionnaire', questionnaire.link]">
+  <div class="questionnaire-card" fxLayout="column" (click)="openQuestionnaire(questionnaire)">
     <div style="display: flex; flex-direction: row">
-      <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}})<img *ngIf="questionnaire.password !== null" alt="password" src="assets/images/lock.png" class="password-img"></h3>
+      <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}}) <img *ngIf="questionnaire.password !== null" alt="password" src="assets/images/lock.png" class="password-img"></h3>
       <div style="margin-left: auto">
         <h5 style="color: #2F96B4; text-align: center">{{questionnaire.user.name}}</h5>
       </div>

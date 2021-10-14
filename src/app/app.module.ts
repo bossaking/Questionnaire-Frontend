@@ -35,6 +35,14 @@ import { SingleQuestionnaireAdminComponent } from './single-questionnaire-admin/
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
+import {MatDialogModule} from '@angular/material/dialog';
+import { PasswordDialogComponent } from './password-dialog/password-dialog.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatButtonModule} from "@angular/material/button";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import { SingleQuestionnaireComponent } from './single-questionnaire/single-questionnaire.component';
+
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
@@ -59,7 +67,9 @@ const appRoutes: Routes = [
     HomeComponent,
     LoginComponent,
     QuestionnairesComponent,
-    SingleQuestionnaireAdminComponent
+    SingleQuestionnaireAdminComponent,
+    PasswordDialogComponent,
+    SingleQuestionnaireComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +88,7 @@ const appRoutes: Routes = [
     DxScrollViewModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatDialogModule,
     ToastrModule.forRoot({
       timeOut: 1000,
     }),
@@ -93,7 +104,11 @@ const appRoutes: Routes = [
         useFactory: httpTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     HttpClient,
