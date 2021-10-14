@@ -20,7 +20,7 @@ export class QuestionnairesService extends Service {
 
 
   store(data: any): Observable<any> {
-    return this.http.post(GlobalVariables.appUrl + "tests/store", data)
+    return this.http.post(GlobalVariables.appUrl + "admin/tests/store", data)
       .pipe(
         map(() => {
             this.showSuccess("Questionnaire has been added successfully!");
@@ -36,7 +36,7 @@ export class QuestionnairesService extends Service {
   }
 
   getMine(): Observable<TestsResponse>{
-    return this.http.get<TestsResponse>(GlobalVariables.appUrl + "tests")
+    return this.http.get<TestsResponse>(GlobalVariables.appUrl + "admin/tests")
       .pipe(
         map((result: TestsResponse) => {
           return result;
@@ -49,7 +49,7 @@ export class QuestionnairesService extends Service {
   }
 
   getByLink(link: string): Observable<any>{
-    return this.http.get(GlobalVariables.appUrl + "tests/show/" + link)
+    return this.http.get(GlobalVariables.appUrl + "admin/tests/show/" + link)
       .pipe(
         map((result: any) => {
           return result;
