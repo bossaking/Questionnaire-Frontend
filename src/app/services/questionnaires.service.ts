@@ -35,6 +35,19 @@ export class QuestionnairesService extends Service {
       );
   }
 
+  getAll(): Observable<TestsResponse>{
+    return this.http.get<TestsResponse>(GlobalVariables.appUrl + "tests")
+      .pipe(
+        map((result: TestsResponse) => {
+          return result;
+        }),
+        catchError((err) => {
+          this.showError(err.error.message);
+          return throwError(err);
+        })
+      );
+  }
+
   getMine(): Observable<TestsResponse>{
     return this.http.get<TestsResponse>(GlobalVariables.appUrl + "admin/tests")
       .pipe(
