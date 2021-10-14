@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     this.questionnairesService.getAll().subscribe((result: TestsResponse) => {
       this.loadingVisible = false;
       this.questionnaires = result.tests;
-      console.log(this.questionnaires);
       for(let questionnaire of this.questionnaires){
         questionnaire.expiration_date = Date.parse(questionnaire.expiration_at);
       }
