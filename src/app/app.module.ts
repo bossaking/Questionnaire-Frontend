@@ -54,7 +54,8 @@ const appRoutes: Routes = [
     }]
   },
   {path: 'mine-questionnaires', component: QuestionnairesComponent},
-  {path: 'show-questionnaire/:link', component: SingleQuestionnaireAdminComponent}
+  {path: 'show-questionnaire/:link', component: SingleQuestionnaireAdminComponent},
+  {path: 'questionnaire/:link', component: SingleQuestionnaireComponent}
 ];
 
 @NgModule({

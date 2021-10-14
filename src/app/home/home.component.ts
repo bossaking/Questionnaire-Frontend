@@ -39,7 +39,15 @@ export class HomeComponent implements OnInit {
       const dialogRef = this.dialog.open(PasswordDialogComponent);
 
       dialogRef.afterClosed().subscribe(result => {
-        this.password = result === undefined ? "" : result;
+        if(result === undefined) return;
+        this.password = result;
+        this.loadingVisible = true;
+        this.questionnairesService.getByLinkWithPassword(questionnaire.link, this.password).subscribe(result => {
+          this.loadingVisible = false;
+          if(result){
+            console.log(result);
+          }
+        });
       });
     }
   }

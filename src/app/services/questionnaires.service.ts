@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable, of, throwError} from "rxjs";
 import {GlobalVariables} from "../share/GlobalVariables";
 import {catchError, map} from "rxjs/operators";
@@ -70,6 +70,21 @@ export class QuestionnairesService extends Service {
         catchError((err) => {
           this.showError(err.error.message);
           return throwError(err);
+        })
+      );
+  }
+
+  getByLinkWithPassword(link: string, password:string): Observable<any>{
+    const params = new HttpParams().append('password', password);
+    return this.http.get(GlobalVariables.appUrl + "tests/show/" + link, {params: params})
+      .pipe(
+        map((result: any) => {
+          return result;
+        }),
+        catchError((err) => {
+          this.showError(err.error.errors.message);
+          console.log(err);
+          return of(false);
         })
       );
   }

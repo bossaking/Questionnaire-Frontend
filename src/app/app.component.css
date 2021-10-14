@@ -1,5 +1,6 @@
 .container{
   display: flex;
+  padding-bottom: 1em;
 }
 .main{
   margin: 0 auto;
