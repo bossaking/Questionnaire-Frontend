@@ -3,6 +3,7 @@ import {QuestionnaireResponse} from "../Interfaces/QuestionnaireResponse";
 import {QuestionnairesService, TestsResponse} from "../services/questionnaires.service";
 import {MatDialog} from "@angular/material/dialog";
 import {PasswordDialogComponent} from "../password-dialog/password-dialog.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   password: string = "";
 
-  constructor(private questionnairesService: QuestionnairesService, public dialog: MatDialog) {
+  constructor(private questionnairesService: QuestionnairesService, public dialog: MatDialog, private router: Router) {
     this.actualDate = Date.now();
   }
 
@@ -45,10 +46,12 @@ export class HomeComponent implements OnInit {
         this.questionnairesService.getByLinkWithPassword(questionnaire.link, this.password).subscribe(result => {
           this.loadingVisible = false;
           if(result){
-            console.log(result);
+            this.router.navigate(['/questionnaire', questionnaire.link], { queryParams: {password: this.password}});
           }
         });
       });
+    }else{
+      this.router.navigate(['/questionnaire', questionnaire.link]);
     }
   }
 

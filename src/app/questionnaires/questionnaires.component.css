@@ -28,6 +28,7 @@
 
 .questionnaire-card p{
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
 .questionnaire-card:hover{
