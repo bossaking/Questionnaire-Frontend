@@ -25,6 +25,8 @@ import {Option} from "../Interfaces/Option";
 export class SingleQuestionComponent implements OnInit {
 
   question: Question;
+  edited: boolean = false;
+  editMode: boolean = false;
   @Output() onRemoveEvent = new EventEmitter();
 
 
@@ -84,6 +86,7 @@ export class SingleQuestionComponent implements OnInit {
     let options = [];
     for(let i = 0; i < answers.length; i++){
       options.push(this.generateNewAnswersOptions(i));
+
     }
     return options;
   }
@@ -110,6 +113,7 @@ export class SingleQuestionComponent implements OnInit {
             stylingMode: "text",
             icon: "trash",
             onClick: () => {
+              this.edited = true;
               this.question.options!.splice(index, 1);
               this.answersOptions = this.getAnswersOptions(this.question.options);
             }

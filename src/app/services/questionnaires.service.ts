@@ -89,6 +89,22 @@ export class QuestionnairesService extends Service {
       );
   }
 
+  update(link: string, data: any): Observable<any> {
+    return this.http.post(GlobalVariables.appUrl + "admin/tests/update/" + link, data)
+      .pipe(
+        map(() => {
+            this.showSuccess("Questionnaire has been updated successfully!");
+            return of(true);
+          }
+        ),
+        catchError((err) => {
+          this.showError(err.error.message);
+          console.log(err);
+          return of(false);
+        })
+      );
+  }
+
   submit(link: string, data: any): Observable<any> {
     return this.http.post(GlobalVariables.appUrl + "tests/submit/" + link, data)
       .pipe(

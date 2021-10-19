@@ -2,7 +2,7 @@
   <dx-form labelLocation="top" [colCount]="2" [formData]="question">
     <dxi-item dataField="name" [isRequired]="true">
     </dxi-item>
-    <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true">
+    <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true" [disabled]="editMode">
     </dxi-item>
     <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }"
               [colSpan]="2"></dxi-item>
@@ -31,7 +31,7 @@
   <dx-form style="margin-bottom: 1em" [formData]="question">
     <dxi-item itemType="group" caption="Options" name="answers-container">
       <dxi-item name="options" itemType="group" *ngFor="let answer of answersOptions; let i = index">
-        <dxi-item [dataField]="'options[' + i + '].description'" [editorOptions]="answersOptions[i].description">
+        <dxi-item [dataField]="'options[' + i + '].description'" [editorOptions]="answersOptions[i]">
           <dxo-label location="left" [text]="'Option ' + (i+ 1)">
           </dxo-label>
         </dxi-item>

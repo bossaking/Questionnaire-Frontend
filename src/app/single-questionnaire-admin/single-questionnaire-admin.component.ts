@@ -5,6 +5,10 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {Lang} from "../Interfaces/Lang";
 import {SingleQuestionComponent} from "../single-question/single-question.component";
 import {Question} from "../Interfaces/Question";
+import {UpdateQuestionnaireRequest} from "../Interfaces/UpdateQuestionnaireRequest";
+import {NewQuestionRequest} from "../Interfaces/NewQuestionRequest";
+import {Option} from "../Interfaces/Option";
+import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-single-questionnaire-admin',
@@ -17,7 +21,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   questionnaire: Questionnaire;
 
   updateButtonOptions: any = {
-    text: "Update",
+    text: "Save",
     type: "success",
     stylingMode: "outlined",
     onClick:() => {
@@ -74,6 +78,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
     component.instance.onRemoveEvent.subscribe(() => {
       this.removeComponent(component);
     });
+    component.instance.editMode = true;
     this.questions.push(component);
     setTimeout(() => {
       this.button.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
@@ -92,6 +97,60 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   }
 
   updateQuestionnaire(){
+    let request = {} as UpdateQuestionnaireRequest;
+    request.lang = this.questionnaire.lang;
+    request.expiration_at = formatDate(this.questionnaire.expiration_at, 'yyyy-MM-dd HH:mm:ss', 'pl');
+    request.description = this.questionnaire.description;
+    request.name = this.questionnaire.name;
+    request.is_active = this.questionnaire.is_active;
+    request.password = this.questionnaire.password;
+    request.questions = [];
+
+    for(let question of this.questions){
+
+      if(question.instance.question.id !== undefined){
+        if(question.instance.question.options?.find(o => o.id === null || o.id === undefined) !== undefined || question.instance.edited){
+          let newQuestion = {} as NewQuestionRequest;
+          newQuestion.name = question.instance.question.name;
+          newQuestion.type = question.instance.question.type;
+          newQuestion.description = question.instance.question.description;
+          newQuestion.is_required = question.instance.question.is_required;
+          if(newQuestion.type === 1){
+            newQuestion.options = null;
+          }else{
+            newQuestion.options = [];
+            // @ts-ignore
+            for(let option of question.instance.question.options){
+              let newOption = {} as Option;
+              newOption.description = option.description;
+              newQuestion.options.push(newOption);
+            }
+          }
+          // @ts-ignore
+          request.questions.push(newQuestion);
+        }else{
+          // @ts-ignore
+          request.questions.push(question.instance.question);
+        }
+      }else{
+        let newQuestion = {} as NewQuestionRequest;
+        newQuestion.name = question.instance.question.name;
+        newQuestion.type = question.instance.question.type;
+        newQuestion.description = question.instance.question.description;
+        newQuestion.is_required = question.instance.question.is_required;
+        if(newQuestion.type === 1){
+          newQuestion.options = null;
+        }else{
+          newQuestion.options = question.instance.question.options;
+        }
+        // @ts-ignore
+        request.questions.push(newQuestion);
+      }
+    }
+    console.log(request);
+    this.questionnairesService.update(this.questionnaire.link, request).subscribe(result => {
+      console.log(result);
+    });
   }
 
 }
