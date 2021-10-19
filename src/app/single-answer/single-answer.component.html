@@ -14,8 +14,7 @@
     <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
   </div>
   <dx-form [formData]="answer">
-    <dxi-item dataField="text" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"
-              [isRequired]="question.is_required">
+    <dxi-item dataField="text" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2">
       <dxo-label text=" " [showColon]="false" location="top"></dxo-label>
     </dxi-item>
   </dx-form>
@@ -28,7 +27,7 @@
     <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
   </div>
   <dx-form>
-    <dxi-item editorType="dxRadioGroup" [editorOptions]="singleOptions" [isRequired]="question.is_required">
+    <dxi-item editorType="dxRadioGroup" [editorOptions]="singleOptions">
     </dxi-item>
   </dx-form>
 </ng-template>

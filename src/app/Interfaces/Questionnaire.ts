@@ -8,4 +8,5 @@ export interface Questionnaire{
   is_active:boolean;
   expiration_at:string;
   questions: Question[];
+  link:string;
 }

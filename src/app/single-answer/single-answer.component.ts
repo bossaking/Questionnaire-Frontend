@@ -24,8 +24,6 @@ export class SingleAnswerComponent implements OnInit {
   questionTypes: QuestionType[] = [];
 
   singleOptions: any;
-  multipleOptions: any;
-
   @ViewChild('template') template: any;
   @ViewChild('button') button: any;
   constructor() {
@@ -84,7 +82,6 @@ export class SingleAnswerComponent implements OnInit {
   }
 
   handleMultipleChange(e: any){
-    console.log(this.answer);
     if(e.value){
       this.answer.multipleOptions.push(this.question.options?.find(o => o.description === e.element.innerText)!);
     }else{

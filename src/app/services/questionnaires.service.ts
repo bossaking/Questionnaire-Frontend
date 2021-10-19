@@ -88,6 +88,22 @@ export class QuestionnairesService extends Service {
         })
       );
   }
+
+  submit(link: string, data: any): Observable<any> {
+    return this.http.post(GlobalVariables.appUrl + "tests/submit/" + link, data)
+      .pipe(
+        map(() => {
+            this.showSuccess("Questionnaire has been submitted successfully!");
+            return of(true);
+          }
+        ),
+        catchError((err) => {
+          this.showError(err.error.message);
+          console.log(err);
+          return of(false);
+        })
+      );
+  }
 }
 
 export interface TestsResponse{
