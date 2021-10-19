@@ -1,7 +1,7 @@
 import {Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {Questionnaire} from "../Interfaces/Questionnaire";
 import {QuestionnairesService} from "../services/questionnaires.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Lang} from "../Interfaces/Lang";
 import {SingleQuestionComponent} from "../single-question/single-question.component";
 import {Question} from "../Interfaces/Question";
@@ -44,7 +44,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | any;
   @ViewChild('button') button: any;
 
-  constructor(private questionnairesService: QuestionnairesService, private activatedRoute: ActivatedRoute, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private questionnairesService: QuestionnairesService, private activatedRoute: ActivatedRoute, private componentFactoryResolver: ComponentFactoryResolver, private router: Router) {
     this.languages.push(new class implements Lang {
       Id = "pl";
       Name = "Polski"
@@ -64,7 +64,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
         this.questionnaire = response.test;
         this.loadingVisible = false;
         for(let question of this.questionnaire.questions){
-          this.addComponent(question);
+          this.init(question);
         }
         for(let question of this.questions){
           question.instance.editMode = true;
@@ -73,15 +73,19 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
     });
   }
 
-  addComponent(question: Question | null) {
+  init(question: Question | null){
     const componentFactory = this.componentFactoryResolver.resolveComponentFactory(SingleQuestionComponent);
     const component = this.container!.createComponent(componentFactory);
     if(question !== null)
-    component.instance.setQuestion(question);
+      component.instance.setQuestion(question);
     component.instance.onRemoveEvent.subscribe(() => {
       this.removeComponent(component);
     });
     this.questions.push(component);
+  }
+
+  addComponent(question: Question | null) {
+    this.init(question);
     setTimeout(() => {
       this.button.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
     }, 10 );
@@ -99,6 +103,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   }
 
   updateQuestionnaire(){
+    this.loadingVisible = true;
     let request = {} as UpdateQuestionnaireRequest;
     request.lang = this.questionnaire.lang;
     request.expiration_at = formatDate(this.questionnaire.expiration_at, 'yyyy-MM-dd HH:mm:ss', 'pl');
@@ -149,9 +154,11 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
         request.questions.push(newQuestion);
       }
     }
-    console.log(request);
     this.questionnairesService.update(this.questionnaire.link, request).subscribe(result => {
-      console.log(result);
+      this.loadingVisible = false;
+      if(result){
+        this.router.navigate(['mine-questionnaires']);
+      }
     });
   }
 

@@ -38,10 +38,6 @@ export class SingleQuestionComponent implements OnInit {
   answersOptions: any[] = [];
 
   questionTypes: QuestionType[] = [];
-  // answers: string[] = [];
-  singleOptions: any = [
-    {value: "Option 1"}
-  ];
 
   deleteButtonOptions: any = {
     text: "Remove",
@@ -157,9 +153,6 @@ export class SingleQuestionComponent implements OnInit {
     switch (this.question.type) {
       case 1:
         this.open = true;
-        setTimeout(() => {
-          this.template.nativeElement.scrollIntoView({behavior: 'smooth', block: 'center', inline: 'nearest'});
-        }, 10 );
         break;
       case 2:
         this.single = true;
