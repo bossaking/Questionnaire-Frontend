@@ -66,6 +66,9 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
         for(let question of this.questionnaire.questions){
           this.addComponent(question);
         }
+        for(let question of this.questions){
+          question.instance.editMode = true;
+        }
       })
     });
   }
@@ -78,7 +81,6 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
     component.instance.onRemoveEvent.subscribe(() => {
       this.removeComponent(component);
     });
-    component.instance.editMode = true;
     this.questions.push(component);
     setTimeout(() => {
       this.button.nativeElement.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
