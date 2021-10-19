@@ -1,0 +1,46 @@
+<div class="question-card" fxLayout="column">
+  <h5 class="q-name">{{question.name}}</h5>
+  <p>{{question.description}}</p>
+  <div #template>
+    <ng-template [ngIf]="open" [ngIfThen]="openQuestion"></ng-template>
+    <ng-template [ngIf]="single" [ngIfThen]="singleChoice"></ng-template>
+    <ng-template [ngIf]="multiple" [ngIfThen]="multipleChoice"></ng-template>
+  </div>
+</div>
+
+<ng-template #openQuestion>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <h4>Your answer:</h4>
+    <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
+  </div>
+  <dx-form [formData]="answer">
+    <dxi-item dataField="text" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"
+              [isRequired]="question.is_required">
+      <dxo-label text=" " [showColon]="false" location="top"></dxo-label>
+    </dxi-item>
+  </dx-form>
+
+</ng-template>
+
+<ng-template #singleChoice>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <h4>Select one option:</h4>
+    <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
+  </div>
+  <dx-form>
+    <dxi-item editorType="dxRadioGroup" [editorOptions]="singleOptions" [isRequired]="question.is_required">
+    </dxi-item>
+  </dx-form>
+</ng-template>
+
+<ng-template #multipleChoice>
+  <div fxLayout="row" fxLayoutGap="5px">
+    <h4>Select one or more options:</h4>
+    <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
+  </div>
+
+  <div *ngFor="let answer of question.options;">
+    <dx-check-box style="margin-bottom: 0.5em" [text]="answer.description" (onValueChanged)="handleMultipleChange($event)"></dx-check-box>
+  </div>
+
+</ng-template>

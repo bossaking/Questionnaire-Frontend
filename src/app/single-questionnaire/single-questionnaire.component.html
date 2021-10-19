@@ -6,3 +6,16 @@
   [shading]="true"
   [closeOnOutsideClick]="false">
 </dx-load-panel>
+<h6 class="q-name">{{questionnaire.name}}</h6>
+<h5>Expired at {{questionnaire.expiration_at}}</h5>
+<h4 class="q-questions">{{questionnaire.questions?.length}} questions</h4>
+
+<div fxLayout="column" fxLayoutGap="25px">
+<ng-template #container></ng-template>
+<dx-button
+  (onClick)="saveAnswers()"
+  text="Save"
+  stylingMode="outlined"
+  type="success">
+</dx-button>
+</div>

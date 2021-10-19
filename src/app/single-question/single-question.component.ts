@@ -25,11 +25,8 @@ import {Option} from "../Interfaces/Option";
 export class SingleQuestionComponent implements OnInit {
 
   question: Question;
-
-  // @Input() setQuestionEvent = new EventEmitter();
   @Output() onRemoveEvent = new EventEmitter();
 
-  //question: Question;
 
   open: boolean = false;
   single: boolean = false;

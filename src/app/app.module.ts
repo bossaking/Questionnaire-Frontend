@@ -17,6 +17,7 @@ import {DxiItemModule} from "devextreme-angular/ui/nested";
 import {DxMenuModule} from "devextreme-angular";
 import {DxToastModule} from "devextreme-angular";
 import {DxScrollViewModule} from "devextreme-angular";
+import {DxCheckBoxModule} from "devextreme-angular";
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SingleQuestionComponent} from './single-question/single-question.component';
@@ -42,6 +43,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { SingleQuestionnaireComponent } from './single-questionnaire/single-questionnaire.component';
+import { SingleAnswerComponent } from './single-answer/single-answer.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -70,7 +72,8 @@ const appRoutes: Routes = [
     QuestionnairesComponent,
     SingleQuestionnaireAdminComponent,
     PasswordDialogComponent,
-    SingleQuestionnaireComponent
+    SingleQuestionnaireComponent,
+    SingleAnswerComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ const appRoutes: Routes = [
     DxiItemModule,
     DxMenuModule,
     DxToastModule,
+    DxCheckBoxModule,
     DxScrollViewModule,
     FlexLayoutModule,
     HttpClientModule,
