@@ -17,9 +17,9 @@
 
 
 <ng-template #questionnaireCard let-questionnaire='questionnaire'>
-  <div class="questionnaire-card" fxLayout="column" [routerLink]="['/show-questionnaire', questionnaire.link]">
+  <div class="questionnaire-card" fxLayout="column">
     <div style="display: flex; flex-direction: row">
-      <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}})<img *ngIf="questionnaire.password !== null" alt="password" src="assets/images/lock.png" class="password-img"></h3>
+      <h3 style="text-align: center">{{questionnaire.name}} ({{questionnaire.lang}}) <img *ngIf="questionnaire.password !== null" alt="password" src="assets/images/lock.png" class="password-img"></h3>
       <div style="margin-left: auto">
         <ng-container [ngTemplateOutlet]="status"
                       [ngTemplateOutletContext]="{questionnaire: questionnaire}"></ng-container>
@@ -29,6 +29,22 @@
     <div>
       <p>{{questionnaire.description}}</p>
     </div>
+    <div style="display: flex; flex-direction: row">
+      <div style="margin-left: auto" fxLayout="row" fxLayoutGap="10px">
+        <dx-button
+          [routerLink]="['/show-questionnaire', questionnaire.link]"
+          text="Update"
+          stylingMode="outlined"
+          type="success">
+        </dx-button>
+        <dx-button
+          text="Details"
+          stylingMode="outlined"
+          type="default">
+        </dx-button>
+      </div>
+    </div>
+
   </div>
 </ng-template>
 
