@@ -9,6 +9,7 @@ import {UpdateQuestionnaireRequest} from "../Interfaces/UpdateQuestionnaireReque
 import {NewQuestionRequest} from "../Interfaces/NewQuestionRequest";
 import {Option} from "../Interfaces/Option";
 import {formatDate} from "@angular/common";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-single-questionnaire-admin',
@@ -20,22 +21,10 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   loadingVisible: boolean = false;
   questionnaire: Questionnaire;
 
-  updateButtonOptions: any = {
-    text: "Save",
-    type: "success",
-    stylingMode: "outlined",
-    onClick:() => {
-      this.updateQuestionnaire();
-    }
-  };
+  updateButtonOptions: any = {};
 
   languages: Lang[] = [];
-  selectLangOptions = {
-    items: this.languages,
-    searchEnabled: false,
-    valueExpr: "Id",
-    displayExpr: "Name"
-  };
+  selectLangOptions = {};
 
   minDate: number;
 
@@ -44,7 +33,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | any;
   @ViewChild('button') button: any;
 
-  constructor(private questionnairesService: QuestionnairesService, private activatedRoute: ActivatedRoute, private componentFactoryResolver: ComponentFactoryResolver, private router: Router) {
+  constructor(private questionnairesService: QuestionnairesService, private activatedRoute: ActivatedRoute, private componentFactoryResolver: ComponentFactoryResolver, private router: Router, public translate: TranslateService) {
     this.languages.push(new class implements Lang {
       Id = "pl";
       Name = "Polski"
@@ -55,6 +44,7 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
     }());
     this.questionnaire = {} as Questionnaire;
     this.minDate = Date.now();
+    this.getTranslations();
   }
 
   ngOnInit(): void {
@@ -70,6 +60,28 @@ export class SingleQuestionnaireAdminComponent implements OnInit {
           question.instance.editMode = true;
         }
       })
+    });
+  }
+
+  getTranslations(){
+    this.translate.get('Save').subscribe((save: string) => {
+      this.updateButtonOptions = {
+        text: save,
+        type: "success",
+        stylingMode: "outlined",
+        onClick:() => {
+          this.updateQuestionnaire();
+        }
+      };
+    });
+    this.translate.get('Select').subscribe((select: string) => {
+      this.selectLangOptions = {
+        placeholder: select,
+        items: this.languages,
+        searchEnabled: false,
+        valueExpr: "Id",
+        displayExpr: "Name"
+      };
     });
   }
 

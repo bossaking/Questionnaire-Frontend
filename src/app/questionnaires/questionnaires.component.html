@@ -25,7 +25,7 @@
                       [ngTemplateOutletContext]="{questionnaire: questionnaire}"></ng-container>
       </div>
     </div>
-    <h5>Expired at {{questionnaire.expiration_at}}</h5>
+    <h5>{{ 'Expired_At' | translate }} {{questionnaire.expiration_at}}</h5>
     <div>
       <p>{{questionnaire.description}}</p>
     </div>
@@ -33,13 +33,13 @@
       <div style="margin-left: auto" fxLayout="row" fxLayoutGap="10px">
         <dx-button
           [routerLink]="['/show-questionnaire', questionnaire.link]"
-          text="Update"
+          text="{{'Update' | translate}}"
           stylingMode="outlined"
           type="success">
         </dx-button>
         <dx-button
           [routerLink]="['/details', questionnaire.link]"
-          text="Details"
+          text="{{'Details' | translate}}"
           stylingMode="outlined"
           type="default">
         </dx-button>
@@ -51,12 +51,8 @@
 
 <ng-template #status let-questionnaire='questionnaire'>
   <h5 *ngIf="questionnaire.expiration_date > actualDate && questionnaire.is_active" fxLayoutAlign="end"
-      style="color: #51A351; text-align: center">Active</h5>
+      style="color: #51A351; text-align: center">{{'Active' | translate}}</h5>
   <h5 *ngIf="questionnaire.expiration_date > actualDate && !questionnaire.is_active"
-      style="color: #2F96B4; text-align: center">Disabled</h5>
-  <h5 *ngIf="questionnaire.expiration_date < actualDate" style="color: #BD362F; text-align: center">Expired</h5>
-</ng-template>
-
-<ng-template #expired>
-  <h5 style="color: #BD362F; text-align: center">Expired</h5>
+      style="color: #2F96B4; text-align: center">{{'Disabled' | translate}}</h5>
+  <h5 *ngIf="questionnaire.expiration_date < actualDate" style="color: #BD362F; text-align: center">{{'Expired' | translate}}</h5>
 </ng-template>

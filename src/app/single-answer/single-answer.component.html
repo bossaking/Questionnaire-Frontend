@@ -10,7 +10,7 @@
 
 <ng-template #openQuestion>
   <div fxLayout="row" fxLayoutGap="5px">
-    <h4>Your answer:</h4>
+    <h4>{{'Your_Answer' | translate}}</h4>
     <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
   </div>
   <dx-form [formData]="answer">
@@ -23,7 +23,7 @@
 
 <ng-template #singleChoice>
   <div fxLayout="row" fxLayoutGap="5px">
-    <h4>Select one option:</h4>
+    <h4>{{'Select_One_Option' | translate}}</h4>
     <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
   </div>
   <dx-form>
@@ -34,7 +34,7 @@
 
 <ng-template #multipleChoice>
   <div fxLayout="row" fxLayoutGap="5px">
-    <h4>Select one or more options:</h4>
+    <h4>{{'Select_More_Options' | translate}}</h4>
     <h4 style="color: #BD362F" *ngIf="question.is_required">*</h4>
   </div>
 

@@ -11,39 +11,42 @@
 
   <dx-form labelLocation="top" [colCount]="2" [formData]="questionnaire">
     <dxi-item dataField="name" [isRequired]="true">
-      <dxo-label text="Questionnaire name">
+      <dxo-label text="{{'Quest_Name' | translate}}">
       </dxo-label>
     </dxi-item>
     <dxi-item [isRequired]="true" dataField="expiration_at" editorType="dxDateBox" [editorOptions]="{ value: minDate, width: '100%', min:minDate, type: 'datetime',
      displayFormat:'d/MM/yyyy HH:mm'}">
-      <dxo-label text="Expiration date">
+      <dxo-label text="{{'Expiration_Date' | translate}}">
       </dxo-label>
     </dxi-item>
-    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2"></dxi-item>
+    <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }" [colSpan]="2">
+      <dxo-label text="{{'Description' | translate}}">
+      </dxo-label>
+    </dxi-item>
     <dxi-item dataField="lang" editorType="dxSelectBox" [editorOptions]="selectLangOptions" [isRequired]="true">
-      <dxo-label text="Language"></dxo-label>
+      <dxo-label text="{{'Language' | translate}}"></dxo-label>
     </dxi-item>
     <dxi-item dataField="password">
-      <dxo-label text="Questionnaire password">
+      <dxo-label text="{{'Password' | translate}}">
       </dxo-label>
     </dxi-item>
     <dxi-item dataField="is_active" editorType="dxSwitch" [editorOptions]="{value:'true'}">
       <dxo-label
         location="left"
-        text="Active">
+        text="{{'Active' | translate}}">
       </dxo-label>
     </dxi-item>
     <dxi-item itemType="button" [buttonOptions]="createButtonOptions">
     </dxi-item>
   </dx-form>
 
-  <h2>Questions: </h2>
+  <h2>{{'Questions' | translate}} </h2>
 
   <ng-template #container></ng-template>
   <div fxLayout="row" fxLayoutGap="25px" #button>
     <dx-button
       (click)="addComponent()"
-      text="Add new question"
+      text="{{'Add_New_Question' | translate}}"
       stylingMode="outlined"
       type="success"
       icon="add">

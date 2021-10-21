@@ -1,13 +1,24 @@
 <div class="question-card" fxLayout="column">
   <dx-form labelLocation="top" [colCount]="2" [formData]="question">
     <dxi-item dataField="name" [isRequired]="true">
+      <dxo-label
+        text="{{'Question_Name' | translate}}">
+      </dxo-label>
     </dxi-item>
     <dxi-item dataField="type" editorType="dxSelectBox" [editorOptions]="selectTypeOptions" [isRequired]="true" [disabled]="editMode">
+      <dxo-label
+        text="{{'Type' | translate}}">
+      </dxo-label>
     </dxi-item>
     <dxi-item dataField="description" [isRequired]="true" editorType="dxTextArea" [editorOptions]="{ height: 90 }"
-              [colSpan]="2"></dxi-item>
+              [colSpan]="2">
+      <dxo-label
+        text="{{'Description' | translate}}">
+      </dxo-label>
+    </dxi-item>
     <dxi-item dataField="is_required" editorType="dxSwitch">
       <dxo-label
+        text="{{'Is_Required' | translate}}"
         location="left"
         alignment="right">
       </dxo-label>
@@ -23,16 +34,16 @@
 
 <ng-template #openQuestion>
   <dx-text-area
-    placeholder="Open question answer text" [disabled]="true" height="90">
+    placeholder="{{'Open_Question_Answer_Placeholder' | translate}}" [disabled]="true" height="90">
   </dx-text-area>
 </ng-template>
 
 <ng-template #choices>
   <dx-form style="margin-bottom: 1em" [formData]="question">
-    <dxi-item itemType="group" caption="Options" name="answers-container">
+    <dxi-item itemType="group" caption="{{'Options' | translate}}" name="answers-container">
       <dxi-item name="options" itemType="group" *ngFor="let answer of answersOptions; let i = index">
         <dxi-item [dataField]="'options[' + i + '].description'" [editorOptions]="answersOptions[i]">
-          <dxo-label location="left" [text]="'Option ' + (i+ 1)">
+          <dxo-label location="left" text="{{'Option' | translate}} {{i + 1}}">
           </dxo-label>
         </dxi-item>
       </dxi-item>
@@ -42,7 +53,7 @@
   <div #button>
     <dx-button
       (click)="addNewAnswerOption()"
-      text="Add new option"
+      text="{{'Add_New_Option' | translate}}"
       stylingMode="outlined"
       type="success"
       icon="add">

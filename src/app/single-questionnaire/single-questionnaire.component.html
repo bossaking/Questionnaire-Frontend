@@ -8,14 +8,14 @@
   indicatorSrc='assets/images/loading.gif'>
 </dx-load-panel>
 <h6 class="q-name">{{questionnaire.name}}</h6>
-<h5>Expired at {{questionnaire.expiration_at}}</h5>
-<h4 class="q-questions">{{questionnaire.questions?.length}} questions</h4>
+<h5>{{'Expired_At' | translate}} {{questionnaire.expiration_at}}</h5>
+<h4 class="q-questions">{{ 'Questions_Count' | translate }} {{questionnaire.questions?.length}}</h4>
 
 <div fxLayout="column" fxLayoutGap="25px">
 <ng-template #container></ng-template>
 <dx-button
   (onClick)="saveAnswers()"
-  text="Submit"
+  text="{{'Submit' | translate}}"
   stylingMode="outlined"
   type="success">
 </dx-button>

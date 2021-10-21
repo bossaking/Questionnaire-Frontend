@@ -8,7 +8,7 @@
   indicatorSrc='assets/images/loading.gif'>
 </dx-load-panel>
 <h4>{{questionnaireDetails.name}}</h4>
-<h3>Submissions: {{questionnaireDetails.submit_count}}</h3>
+<h3>{{'Submissions' | translate}} {{questionnaireDetails.submit_count}}</h3>
 
 
 <div fxLayout="row wrap" fxLayoutGap="25px grid" *ngIf="questionnaireDetails.submit_count > 0">

@@ -15,6 +15,7 @@ import {Questionnaire} from "../Interfaces/Questionnaire";
 import {formatDate} from "@angular/common";
 import {QuestionnairesService} from "../services/questionnaires.service";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-new-questionnaire',
@@ -26,31 +27,20 @@ export class NewQuestionnaireComponent implements AfterViewInit {
   loadingVisible: boolean = false;
   questionnaire: Questionnaire;
 
-  createButtonOptions: any = {
-    text: "Create",
-    type: "success",
-    stylingMode: "outlined",
-    onClick:() => {
-      this.createNewQuestionnaire();
-    }
-  };
+  createButtonOptions: any = {};
+
 
   minDate: number;
 
   languages: Lang[] = [];
-  selectLangOptions = {
-    items: this.languages,
-    searchEnabled: false,
-    valueExpr: "Id",
-    displayExpr: "Name"
-  };
+  selectLangOptions = {};
 
   questions: ComponentRef<SingleQuestionComponent>[] = [];
 
   @ViewChild('container', {read: ViewContainerRef}) container: ViewContainerRef | any;
   @ViewChild('button') button: any;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private questionnairesService: QuestionnairesService, private router: Router) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private questionnairesService: QuestionnairesService, private router: Router, public translate: TranslateService) {
     this.languages.push(new class implements Lang {
       Id = "pl";
       Name = "Polski"
@@ -61,8 +51,30 @@ export class NewQuestionnaireComponent implements AfterViewInit {
     }());
     this.minDate = Date.now();
     this.questionnaire = {} as Questionnaire;
+    this.getTranslations();
   }
 
+  getTranslations(){
+    this.translate.get('Create').subscribe((create: string) => {
+      this.createButtonOptions = {
+        text: create,
+        type: "success",
+        stylingMode: "outlined",
+        onClick:() => {
+          this.createNewQuestionnaire();
+        }
+      };
+    });
+    this.translate.get('Select').subscribe((select: string) => {
+      this.selectLangOptions = {
+        placeholder: select,
+        items: this.languages,
+        searchEnabled: false,
+        valueExpr: "Id",
+        displayExpr: "Name"
+      };
+    });
+  }
 
   ngAfterViewInit() {
   }
