@@ -28,7 +28,7 @@ export class QuestionnairesService extends Service {
           }
         ),
         catchError((err) => {
-          this.showError(err.error.message);
+          this.showError(err.error.errors[Object.keys(err.error.errors)[0]]);
           console.log(err);
           return of(false);
         })
@@ -97,7 +97,7 @@ export class QuestionnairesService extends Service {
           }
         ),
         catchError((err) => {
-          this.showError(err.error.message);
+          this.showError(err.error.errors[Object.keys(err.error.errors)[0]]);
           console.log(err);
           return of(false);
         })
@@ -113,7 +113,7 @@ export class QuestionnairesService extends Service {
           }
         ),
         catchError((err) => {
-          this.showError(err.error.message);
+          this.showError(err.error.errors[Object.keys(err.error.errors)[0]]);
           console.log(err);
           return of(false);
         })

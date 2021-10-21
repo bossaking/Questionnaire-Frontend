@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
         type: "success",
         icon: "user",
         stylingMode: "outlined",
+        useSubmitBehavior: true,
         onClick: () => {
           this.login()
         }

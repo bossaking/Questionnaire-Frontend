@@ -43,5 +43,8 @@
   "Disabled": "Disabled",
   "Expired": "Expired",
   "Submissions": "Submissions:",
-  "Save": "Save"
+  "Save": "Save",
+  "Required": "Field is required",
+  "Invalid": "Value is invalid",
+  "AlreadyTaken": "Email already taken"
 }

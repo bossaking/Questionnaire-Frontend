@@ -43,5 +43,8 @@
   "Disabled": "Niedostępna",
   "Expired": "Wygasła",
   "Submissions": "Wypełniona:",
-  "Save": "Zapisz"
+  "Save": "Zapisz",
+  "Required": "Pole jest wymagane",
+  "Invalid": "Nieprawidłowa wartość",
+  "AlreadyTaken": "Użytkownik o podanym email już instnieje"
 }

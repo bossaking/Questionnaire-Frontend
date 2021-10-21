@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
         type: "success",
         icon: "user",
         stylingMode: "outlined",
+        useSubmitBehavior: true,
         onClick: () => {
           this.register()
         }

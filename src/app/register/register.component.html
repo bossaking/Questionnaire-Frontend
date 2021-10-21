@@ -4,15 +4,35 @@
   <hr>
   <dx-form labelLocation="top" [formData]="registerUser">
     <dxi-item dataField="email" [isRequired]="true" >
+      <dxi-validation-rule
+        type="required"
+        message="{{'Required' | translate}}">
+      </dxi-validation-rule>
+      <dxi-validation-rule
+        type="email"
+        message="{{'Invalid' | translate}}">
+      </dxi-validation-rule>
     </dxi-item>
     <dxi-item dataField="name" [isRequired]="true" >
       <dxo-label text="{{'Username' | translate}}"></dxo-label>
+      <dxi-validation-rule
+        type="required"
+        message="{{'Required' | translate}}">
+      </dxi-validation-rule>
     </dxi-item>
     <dxi-item dataField="password" [isRequired]="true" [editorOptions]="{mode: 'password'}" >
       <dxo-label text="{{'Password' | translate}}"></dxo-label>
+      <dxi-validation-rule
+        type="required"
+        message="{{'Required' | translate}}">
+      </dxi-validation-rule>
     </dxi-item>
     <dxi-item dataField="RepeatPassword" [isRequired]="true" [editorOptions]="{mode: 'password'}" >
       <dxo-label text="{{'RepeatPassword' | translate}}"></dxo-label>
+      <dxi-validation-rule
+        type="required"
+        message="{{'Required' | translate}}">
+      </dxi-validation-rule>
     </dxi-item>
 
     <dxi-item itemType="button" [buttonOptions]="registerOptions">
