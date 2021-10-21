@@ -45,7 +45,11 @@ export class SingleQuestionnaireComponent implements OnInit {
   preparePasswordDialog(){
     const dialogRef = this.dialog.open(PasswordDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      this.initQuestionnaire(result);
+      if(result === undefined){
+        this.router.navigate(['home']);
+      }else {
+        this.initQuestionnaire(result);
+      }
     });
   }
 

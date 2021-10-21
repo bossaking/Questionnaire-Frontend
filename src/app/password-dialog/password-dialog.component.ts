@@ -10,4 +10,8 @@ export class PasswordDialogComponent {
 
   password:string = "";
   constructor(public dialogRef: MatDialogRef<PasswordDialogComponent>) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
