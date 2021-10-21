@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "angular2-qrcode": "^2.0.3",
     "devextreme": "21.1.6",
     "devextreme-angular": "21.1.6",
     "devextreme-schematics": "^1.2.21",

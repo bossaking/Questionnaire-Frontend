@@ -28,5 +28,7 @@
     <div>
       <p>{{questionnaire.description}}</p>
     </div>
+    <qr-code style="margin-top: 1em" *ngIf="questionnaire.password !== null" [value]="'http://localhost:4200/questionnaire/' + questionnaire.link + '?password=required'"></qr-code>
+    <qr-code style="margin-top: 1em" *ngIf="questionnaire.password === null" [value]="'http://localhost:4200/questionnaire/' + questionnaire.link"></qr-code>
   </div>
 </ng-template>

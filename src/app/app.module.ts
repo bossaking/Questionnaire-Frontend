@@ -45,6 +45,7 @@ import {FormsModule} from "@angular/forms";
 import { SingleQuestionnaireComponent } from './single-questionnaire/single-questionnaire.component';
 import { SingleAnswerComponent } from './single-answer/single-answer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {QRCodeModule} from "angular2-qrcode";
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -116,7 +117,8 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatButtonModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    QRCodeModule
   ],
   providers: [
     HttpClient,
