@@ -1,0 +1,51 @@
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [(visible)]="loadingVisible"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false"
+  indicatorSrc='assets/images/loading.gif'>
+</dx-load-panel>
+<h4>{{questionnaireDetails.name}}</h4>
+<h3>Submissions: {{questionnaireDetails.submit_count}}</h3>
+
+
+<div fxLayout="row wrap" fxLayoutGap="25px grid" *ngIf="questionnaireDetails.submit_count > 0">
+  <div *ngFor="let question of questionnaireDetails.questions" fxLayout="row wrap" fxLayoutGap="25px grid">
+    <ng-container *ngIf="question.type === 2 || question.type === 3" [ngTemplateOutlet]="pieChart"
+                  [ngTemplateOutletContext]="{question: question}"></ng-container>
+
+  </div>
+  <div *ngFor="let question of questionnaireDetails.questions" fxLayout="row wrap" fxLayoutGap="25px grid">
+    <ng-container *ngIf="question.type === 1" [ngTemplateOutlet]="listChart"
+                  [ngTemplateOutletContext]="{question: question}"></ng-container>
+  </div>
+</div>
+<ng-template #pieChart let-question='question'>
+  <dx-pie-chart
+    id="pie"
+    title="{{question.name}}"
+    palette="bright"
+    [dataSource]="question.options">
+    <dxi-series
+      argumentField="description"
+      valueField="answers_count">
+      <dxo-label [visible]="true">
+        <dxo-connector
+          [visible]="true"
+          [width]="1"></dxo-connector>
+      </dxo-label>
+    </dxi-series>
+    <dxo-size [width]="350"></dxo-size>
+    <dxo-export [enabled]="true"></dxo-export>
+  </dx-pie-chart>
+</ng-template>
+
+<ng-template #listChart let-question='question'>
+  <span>{{question.name}}</span>
+  <dx-list
+    [dataSource]="question.options[0].answers"
+    displayExpr="text">
+  </dx-list>
+</ng-template>

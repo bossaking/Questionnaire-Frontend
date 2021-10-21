@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NewQuestionnaireComponent} from './new-questionnaire/new-questionnaire.component';
 
-import {DxBoxModule, DxButtonModule, DxLoadIndicatorModule, DxLoadPanelModule} from "devextreme-angular";
+import {DxBoxModule, DxButtonModule, DxListModule, DxLoadIndicatorModule, DxLoadPanelModule} from "devextreme-angular";
 import {DxSelectBoxModule} from 'devextreme-angular';
 import {DxFormModule} from 'devextreme-angular';
 import {DxTextAreaModule} from "devextreme-angular";
@@ -18,6 +18,7 @@ import {DxMenuModule} from "devextreme-angular";
 import {DxToastModule} from "devextreme-angular";
 import {DxScrollViewModule} from "devextreme-angular";
 import {DxCheckBoxModule} from "devextreme-angular";
+import { DxPieChartModule } from 'devextreme-angular';
 
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {SingleQuestionComponent} from './single-question/single-question.component';
@@ -46,6 +47,7 @@ import { SingleQuestionnaireComponent } from './single-questionnaire/single-ques
 import { SingleAnswerComponent } from './single-answer/single-answer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {QRCodeModule} from "angular2-qrcode";
+import { DetailsComponent } from './details/details.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -60,6 +62,7 @@ const appRoutes: Routes = [
   {path: 'mine-questionnaires', component: QuestionnairesComponent},
   {path: 'show-questionnaire/:link', component: SingleQuestionnaireAdminComponent},
   {path: 'questionnaire/:link', component: SingleQuestionnaireComponent},
+  {path: 'details/:link', component: DetailsComponent},
   {path: 'not-found', component: PageNotFoundComponent}
 ];
 
@@ -77,7 +80,8 @@ const appRoutes: Routes = [
     PasswordDialogComponent,
     SingleQuestionnaireComponent,
     SingleAnswerComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +99,7 @@ const appRoutes: Routes = [
     DxToastModule,
     DxCheckBoxModule,
     DxScrollViewModule,
+    DxPieChartModule,
     FlexLayoutModule,
     HttpClientModule,
     MatDialogModule,
@@ -118,7 +123,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatInputModule,
     FormsModule,
-    QRCodeModule
+    QRCodeModule,
+    DxListModule
   ],
   providers: [
     HttpClient,

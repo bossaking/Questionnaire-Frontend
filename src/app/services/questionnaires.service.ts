@@ -119,7 +119,21 @@ export class QuestionnairesService extends Service {
         })
       );
   }
+
+  details(link: string): Observable<any>{
+    return this.http.get(GlobalVariables.appUrl + "admin/tests/details/" + link)
+      .pipe(
+        map((result: any) => {
+          return result;
+        }),
+        catchError((err) => {
+          this.showError(err.error.message);
+          return throwError(err);
+        })
+      );
+  }
 }
+
 
 export interface TestsResponse{
   tests: QuestionnaireResponse[];
