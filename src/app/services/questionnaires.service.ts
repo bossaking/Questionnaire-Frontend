@@ -83,8 +83,7 @@ export class QuestionnairesService extends Service {
         }),
         catchError((err) => {
           this.showError(err.error.errors.message);
-          console.log(err);
-          return of(false);
+          return of(err);
         })
       );
   }

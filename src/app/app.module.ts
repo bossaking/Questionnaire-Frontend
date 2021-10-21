@@ -44,6 +44,7 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { SingleQuestionnaireComponent } from './single-questionnaire/single-questionnaire.component';
 import { SingleAnswerComponent } from './single-answer/single-answer.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
   },
   {path: 'mine-questionnaires', component: QuestionnairesComponent},
   {path: 'show-questionnaire/:link', component: SingleQuestionnaireAdminComponent},
-  {path: 'questionnaire/:link', component: SingleQuestionnaireComponent}
+  {path: 'questionnaire/:link', component: SingleQuestionnaireComponent},
+  {path: 'not-found', component: PageNotFoundComponent}
 ];
 
 @NgModule({
@@ -73,7 +75,8 @@ const appRoutes: Routes = [
     SingleQuestionnaireAdminComponent,
     PasswordDialogComponent,
     SingleQuestionnaireComponent,
-    SingleAnswerComponent
+    SingleAnswerComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
